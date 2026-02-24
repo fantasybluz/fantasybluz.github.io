@@ -1,107 +1,74 @@
-# 個人自我介紹網站
+# Bluz Lan Portfolio
 
-這是一個使用 React + TypeScript + Vite 構建的現代化自我介紹網站。
+This is Bluz Lan's personal portfolio and resume site, built with React + TypeScript + Vite, with bilingual content support (Chinese/English) and SEO optimization.
 
-## 功能特性
+Website: <https://fantasybluz.github.io/>
 
-- 現代化的設計和漸變色彩
-- 完全響應式設計，適配各種設備
-- 使用 Vite 進行快速開發和構建
-- TypeScript 類型安全
-- 平滑的導航和錨點連結
+## Features
 
-## 包含的頁面
+- Chinese/English language switch with locale persistence
+- Responsive layout (desktop/tablet/mobile)
+- Sticky navbar with translucent state on scroll
+- Resume sections: About, Experience, Skills, Projects, Highlights, Contact
+- SEO enhancements (meta / Open Graph / Twitter / JSON-LD / sitemap / robots)
+- Google Search Console HTML verification support
 
-- **首頁** - 吸引人的 Hero 部分
-- **關於我** - 個人介紹
-- **技能** - 展示你的技能和專長
-- **項目** - 展示你的作品
-- **聯繫** - 聯繫方式
-
-## 快速開始
-
-### 安裝依賴
-
-\`\`\`bash
-npm install
-\`\`\`
-
-### 開發模式
-
-\`\`\`bash
-npm run dev
-\`\`\`
-
-訪問 [http://localhost:5173](http://localhost:5173) 查看網站效果。
-
-### 構建生產版本
-
-\`\`\`bash
-npm run build
-\`\`\`
-
-### 預覽生產版本
-
-\`\`\`bash
-npm run preview
-\`\`\`
-
-## 自訂您的網站
-
-### 編輯內容
-
-編輯 [src/App.tsx](src/App.tsx) 中的以下部分：
-
-- **skills** 數組：更新你的技能
-- **projects** 數組：添加你的項目
-- **聯繫方式**：更新聯繫信息
-
-### 編輯樣式
-
-- [src/App.css](src/App.css) - 主要組件樣式
-- [src/index.css](src/index.css) - 全局樣式
-
-## 技術棧
+## Tech Stack
 
 - React 19
-- TypeScript
+- TypeScript 5
 - Vite 7
-- CSS3
+- ESLint 9
+- Stylelint 17
 
-## 部署
+## Local Development
 
-該網站是靜態的，可以部署到任何靜態託管平台：
+Node.js 20+ is recommended.
 
-- GitHub Pages
-- Vercel
-- Netlify
-- AWS S3
-
-## 許可證
-
-此項目採用 MIT 許可證。
-
-export default defineConfig([
-globalIgnores(['dist']),
-{
-files: ['**/*.{ts,tsx}'],
-extends: [
-// Other configs...
-// Enable lint rules for React
-reactX.configs['recommended-typescript'],
-// Enable lint rules for React DOM
-reactDom.configs.recommended,
-],
-languageOptions: {
-parserOptions: {
-project: ['./tsconfig.node.json', './tsconfig.app.json'],
-tsconfigRootDir: import.meta.dirname,
-},
-// other options...
-},
-},
-])
-
+```bash
+npm install
+npm run dev
 ```
 
+Dev URL: <http://localhost:5173>
+
+## Available Scripts
+
+```bash
+npm run dev       # Start development server
+npm run build     # Build production files into dist
+npm run preview   # Preview production build locally
+npm run lint      # Lint TypeScript/JavaScript
+npm run lint:css  # Lint and auto-fix CSS
 ```
+
+## Main Editable Files
+
+- Main resume/content data: `src/App.tsx` (`contentByLocale`)
+- Main component styles: `src/App.css`
+- Global styles: `src/index.css`
+- Profile image: `public/Bluz_Lan.jpg`
+- Site icon: `public/logo.png`
+
+## SEO & Search Setup
+
+- Main meta tags and structured data: `index.html`
+- Robots file: `public/robots.txt`
+- Sitemap: `public/sitemap.xml`
+- Google verification file: `public/google12b722e4207bfe96.html`
+
+After deployment, verify the Google file at:
+
+`https://fantasybluz.github.io/google12b722e4207bfe96.html`
+
+## Deployment (GitHub Pages)
+
+This project is configured with GitHub Actions to deploy automatically when `main` is updated:
+
+- Workflow: `.github/workflows/deploy.yml`
+- Build output: `dist`
+- Publish branch: `gh-pages`
+
+## License
+
+MIT

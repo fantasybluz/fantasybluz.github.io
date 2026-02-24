@@ -129,9 +129,9 @@ const contentByLocale: Record<Locale, PageContent> = {
       ogLocale: 'zh_TW'
     },
     hero: {
-      greeting: 'Hi，我是',
+      greeting: 'Hi, 我是',
       name: 'Bluz',
-      roleLine: '目前任職於緯創資通 Chthonia 團隊，聚焦 OpenStack Cluster／Node 管理與 Infra 自動化整合，協助平台串接各類基礎設施服務。',
+      roleLine: '目前任職於緯創資通 Chthonia 團隊，專注於 OpenStack Cluster／Node 管理與 Infra 自動化整合，協助平台串接各類基礎設施服務。',
       detailLine: ''
     },
     about: {
@@ -140,13 +140,13 @@ const contentByLocale: Record<Locale, PageContent> = {
       paragraphs: [
         '我是藍詠弘（Bluz Lan），具備後端、前端、雲端平台、DevOps 與機器學習整合能力的軟體工程師。',
         '目前任職於緯創資通 Chthonia 團隊，主要負責 OpenStack、Kubernetes、GPU 節點與儲存權限策略，並持續參與企業系統開發、敏捷協作與跨團隊交付。',
-        '業餘時間也額外投入 AI Agent 相關研究與實作，聚焦在流程自動化、任務協作與落地應用。'
+        '業餘時間持續投入 AI Agent 相關研究與實作，聚焦流程自動化、任務協作與落地應用。'
       ]
     },
     summaryTitle: '專業摘要',
     summaryBullets: [
       '具備後端 / 前端 / 雲端 / DevOps / ML 綜合背景，能從平台到應用端進行整合開發。',
-      '目前於緯創 AIDC 專案負責 OpenStack、Kubernetes、GPU Node 與 Storage 權限規劃與落地。',
+      '目前於緯創 Chthonia / AIDC 專案負責 OpenStack、Kubernetes、GPU Node 與 Storage 權限規劃與落地。',
       '曾參與企業內部系統（DPOM、SPOS）、行動裝置 App、ERP 系統維護與智慧製造 / 工業物聯網研究計畫。',
       '於緯創多個專案中實際參與 Scrum 敏捷流程（Sprint 規劃、Daily、Review、Retrospective）。'
     ],
@@ -171,6 +171,7 @@ const contentByLocale: Record<Locale, PageContent> = {
               '建置與維運 OpenStack 環境（虛擬機、網路、儲存配置）。',
               '規劃與架設 Kubernetes 叢集，作為 AIDC AI 工作負載的基礎平台。',
               '建立 GPU Node（驅動、容器化環境、叢集整合），提供 AI/ML 工作負載使用。',
+              '使用 Golang 搭配 Gin 開發 API，並結合 Gophercloud 進行 OpenStack 服務整合。',
               '設計 Storage 權限管控策略，針對使用者 / 專案 / Namespace / Volume 制定權限與配額。'
             ]
           }
@@ -269,8 +270,8 @@ const contentByLocale: Record<Locale, PageContent> = {
     projects: [
       {
         title: 'Chthonia',
-        description: '在緯創資通 Chthonia 團隊中開發 AIDC 產品，主要負責整合 OpenStack、Kubernetes 與 GPU 節點，支援 AI/ML 工作負載與多租戶儲存權限管理。',
-        technologies: ['OpenStack', 'Kubernetes', 'GPU Node', 'Storage ACL', 'Scrum']
+        description: '在緯創資通 Chthonia 團隊中開發 AIDC 產品，以 Golang + Gin 開發 API，並結合 Gophercloud 串接 OpenStack 服務；同時整合 Kubernetes 與 GPU 節點，支援 AI/ML 工作負載與多租戶儲存權限管理。',
+        technologies: ['Golang', 'Gin', 'Gophercloud', 'OpenStack', 'Kubernetes', 'GPU Node', 'Storage ACL', 'Scrum']
       },
       {
         title: 'DPOM 企業內部訂單管理系統',
@@ -283,8 +284,8 @@ const contentByLocale: Record<Locale, PageContent> = {
         technologies: ['React', 'Node.js', 'PostgreSQL', 'REST API', 'Scrum']
       },
       {
-        title: '高雄捷運 ERP 與行動 App',
-        description: 'ERP 權限模組與工控設備串接、通勤助理 App 開發，涵蓋 Vue.js / Spring / DB2 / Xamarin 等技術棧。',
+        title: '高雄捷運 ERP 與行動 App 開發',
+        description: 'ERP 權限模組與工控設備串接、通勤助理 App 開發，涵蓋 Vue.js、Spring、DB2、Xamarin 等技術棧。',
         technologies: ['Vue.js', 'Spring Boot', 'DB2', 'Xamarin', 'MOXA NPort']
       }
     ],
@@ -356,7 +357,6 @@ const contentByLocale: Record<Locale, PageContent> = {
       }
     ],
     contactMethods: [
-      { label: 'Phone', value: '0978-068-099', href: 'tel:+886978068099' },
       { label: 'Email', value: 'fantasybluz@gmail.com', href: 'mailto:fantasybluz@gmail.com' }
     ],
     socials: [
@@ -395,7 +395,7 @@ const contentByLocale: Record<Locale, PageContent> = {
     hero: {
       greeting: 'Hi, I am',
       name: 'Bluz',
-      roleLine: 'Currently working on the Chthonia team at Wistron ITS, focusing on OpenStack cluster/node management and infrastructure automation integration across core platform services.',
+      roleLine: 'Currently on the Chthonia team at Wistron ITS, focusing on OpenStack cluster/node operations and infrastructure automation across core platform services.',
       detailLine: ''
     },
     about: {
@@ -403,14 +403,14 @@ const contentByLocale: Record<Locale, PageContent> = {
       imageAlt: 'Bluz Lan',
       paragraphs: [
         'I am Bluz Lan, a software engineer with hands-on experience across backend, frontend, cloud platform engineering, DevOps, and ML-related work.',
-        'I currently work on Wistron Chthonia/AIDC initiatives focused on OpenStack, Kubernetes, GPU node onboarding, and storage access control strategy.',
+        'I currently work on Wistron Chthonia/AIDC initiatives focused on OpenStack, Kubernetes, GPU node onboarding, and storage access control.',
         'I am also actively researching and prototyping AI Agent solutions, with a focus on workflow automation, multi-step task collaboration, and practical use cases.'
       ]
     },
     summaryTitle: 'Professional Summary',
     summaryBullets: [
       'Cross-domain experience in backend, frontend, cloud infrastructure, DevOps, and ML workflows.',
-      'Hands-on delivery in Wistron AIDC projects across OpenStack, Kubernetes, GPU node setup, and storage permissions.',
+      'Delivered Wistron AIDC initiatives across OpenStack, Kubernetes, GPU node setup, and storage permission design.',
       'Built and maintained enterprise systems (DPOM, SPOS), mobile applications, ERP modules, and research projects in smart manufacturing / IIoT.',
       'Strong Scrum execution experience: sprint planning, daily stand-ups, reviews, and retrospectives.'
     ],
@@ -432,9 +432,10 @@ const contentByLocale: Record<Locale, PageContent> = {
           {
             period: 'Sep 2025 - Present',
             bullets: [
-              'Built and operated OpenStack environments for compute, networking, and storage.',
+              'Built and operated OpenStack environments for compute, networking, and storage services.',
               'Planned and deployed Kubernetes clusters for AIDC AI workloads.',
               'Onboarded GPU nodes including drivers, container runtime, and cluster integration.',
+              'Built APIs with Golang and Gin, and integrated OpenStack services using Gophercloud.',
               'Designed storage ACL and quota strategies for users, projects, namespaces, and volumes.'
             ]
           }
@@ -465,8 +466,8 @@ const contentByLocale: Record<Locale, PageContent> = {
           {
             period: 'Aug 2024 - Dec 2025',
             bullets: [
-              'Participated in development of the Supply Planning Optimization Solution (SPOS).',
-              'Built features for material information query, integration, and report automation.',
+              'Contributed to the development of the Supply Planning Optimization Solution (SPOS).',
+              'Built features for material data query, integration, and automated reporting.',
               'Implemented frontend modules in React + TypeScript and backend APIs in Node.js + TypeScript.',
               'Used PostgreSQL for transaction and reporting workloads.',
               'Delivered features through Scrum-based iterative development.'
@@ -485,22 +486,7 @@ const contentByLocale: Record<Locale, PageContent> = {
               'Developed ERP access-control modules with Vue.js frontend and Java Spring MVC / Spring Boot backend on DB2.',
               'Integrated MOXA NPort serial device servers with existing systems.',
               'Contributed to the Kaohsiung Metro Commuter Assistant app using Xamarin (.NET Framework).',
-              'Implemented OCR use cases and data processing workflows (pandas / NumPy) for internal scenarios.'
-            ]
-          }
-        ]
-      },
-      {
-        title: 'Intern',
-        company: 'Digiwin',
-        employmentType: 'Internship',
-        segments: [
-          {
-            period: 'Sep 2019 - Feb 2020',
-            bullets: [
-              'Participated in HR system customization and maintenance.',
-              'Developed Windows application modules.',
-              'Designed and queried MS-SQL database tables.'
+              'Implemented OCR use cases and data processing workflows (pandas / NumPy) for internal operational scenarios.'
             ]
           }
         ]
@@ -535,12 +521,12 @@ const contentByLocale: Record<Locale, PageContent> = {
     projects: [
       {
         title: 'Chthonia',
-        description: 'Integrated OpenStack, Kubernetes, and GPU nodes for internal AI/ML workloads with tenant-aware storage access control.',
-        technologies: ['OpenStack', 'Kubernetes', 'GPU', 'Storage ACL', 'Scrum']
+        description: 'Built APIs with Golang and Gin, integrated OpenStack services via Gophercloud, and combined Kubernetes with GPU nodes to support internal AI/ML workloads with tenant-aware storage access control.',
+        technologies: ['Golang', 'Gin', 'Gophercloud', 'OpenStack', 'Kubernetes', 'GPU', 'Storage ACL', 'Scrum']
       },
       {
         title: 'DPOM Enterprise System',
-        description: 'Built React/Node/PostgreSQL workflows and improved performance with asynchronous job processing using BullMQ.',
+        description: 'Built React/Node/PostgreSQL workflows and improved performance by introducing asynchronous job processing with BullMQ.',
         technologies: ['React', 'Node.js', 'PostgreSQL', 'BullMQ', 'TypeScript']
       },
       {
@@ -550,7 +536,7 @@ const contentByLocale: Record<Locale, PageContent> = {
       },
       {
         title: 'KRTC ERP and Mobile App',
-        description: 'Developed ERP modules, integrated industrial device servers, and contributed to a commuter mobile app.',
+        description: 'Developed ERP modules, integrated industrial serial device servers, and contributed to a commuter mobile app.',
         technologies: ['Vue.js', 'Spring Boot', 'DB2', 'Xamarin', 'MOXA NPort']
       }
     ],
@@ -592,7 +578,6 @@ const contentByLocale: Record<Locale, PageContent> = {
       }
     ],
     contactMethods: [
-      { label: 'Phone', value: '+886 978 068 099', href: 'tel:+886978068099' },
       { label: 'Email', value: 'fantasybluz@gmail.com', href: 'mailto:fantasybluz@gmail.com' }
     ],
     socials: [
