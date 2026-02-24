@@ -236,11 +236,11 @@ const contentByLocale: Record<Locale, PageContent> = {
     skills: [
       {
         category: '程式語言與基礎能力',
-        items: ['JavaScript', 'TypeScript', 'Python（機器學習 / 資料處理）', 'Java（Spring MVC / Spring Boot）', 'C#（.NET Framework / Xamarin）']
+        items: ['JavaScript', 'TypeScript', 'Golang（Go）', 'Python（機器學習 / 資料處理）', 'Java（Spring MVC / Spring Boot）', 'C#（.NET Framework / Xamarin）']
       },
       {
         category: '後端開發',
-        items: ['Node.js（TypeScript）', 'RESTful API 設計與實作', 'Java Spring Web MVC / Spring Boot', 'Django / Flask 基本 Web 服務']
+        items: ['Node.js（TypeScript）', 'Express.js（Node.js Framework）', 'Golang + Gin API 開發', 'Gophercloud（OpenStack SDK）整合', 'RESTful API 設計與實作', 'Java Spring Web MVC / Spring Boot', 'Django / Flask 基本 Web 服務']
       },
       {
         category: '前端開發',
@@ -495,11 +495,11 @@ const contentByLocale: Record<Locale, PageContent> = {
     skills: [
       {
         category: 'Languages and Core Skills',
-        items: ['JavaScript', 'TypeScript', 'Python', 'Java', 'C#', 'SQL']
+        items: ['JavaScript', 'TypeScript', 'Golang (Go)', 'Python', 'Java', 'C#', 'SQL']
       },
       {
         category: 'Backend Development',
-        items: ['Node.js (TypeScript)', 'RESTful APIs', 'Java Spring MVC / Spring Boot', 'Django / Flask']
+        items: ['Node.js (TypeScript)', 'Express.js', 'Golang + Gin API development', 'Gophercloud (OpenStack SDK) integration', 'RESTful APIs', 'Java Spring MVC / Spring Boot', 'Django / Flask']
       },
       {
         category: 'Frontend Development',
