@@ -46,6 +46,12 @@ interface CredentialGroup {
   items: string[]
 }
 
+interface SeoContent {
+  title: string
+  description: string
+  ogLocale: string
+}
+
 interface PageContent {
   nav: {
     about: string
@@ -58,6 +64,7 @@ interface PageContent {
   mobileMenuOpenLabel: string
   mobileMenuCloseLabel: string
   languageLabel: string
+  seo: SeoContent
   hero: {
     greeting: string
     name: string
@@ -115,6 +122,12 @@ const contentByLocale: Record<Locale, PageContent> = {
     mobileMenuOpenLabel: '開啟選單',
     mobileMenuCloseLabel: '關閉選單',
     languageLabel: '切換語言',
+    seo: {
+      title: '藍詠弘 Bluz Lan | 軟體工程師作品集',
+      description:
+        '藍詠弘（Bluz Lan）個人履歷網站，聚焦後端、前端、雲端、DevOps 與 ML，具 OpenStack、Kubernetes、GPU 平台整合實務經驗。',
+      ogLocale: 'zh_TW'
+    },
     hero: {
       greeting: 'Hi，我是',
       name: 'Bluz',
@@ -373,6 +386,12 @@ const contentByLocale: Record<Locale, PageContent> = {
     mobileMenuOpenLabel: 'Open menu',
     mobileMenuCloseLabel: 'Close menu',
     languageLabel: 'Switch language',
+    seo: {
+      title: 'Bluz Lan | Software Engineer Portfolio',
+      description:
+        'Software Engineer portfolio of Bluz Lan, focused on backend, frontend, cloud, DevOps, and ML with hands-on OpenStack, Kubernetes, and GPU platform integration.',
+      ogLocale: 'en_US'
+    },
     hero: {
       greeting: 'Hi, I am',
       name: 'Bluz',
@@ -593,6 +612,19 @@ const contentByLocale: Record<Locale, PageContent> = {
   }
 }
 
+function setMetaContent(attribute: 'name' | 'property', key: string, value: string) {
+  const selector = `meta[${attribute}="${key}"]`
+  let element = document.head.querySelector<HTMLMetaElement>(selector)
+
+  if (!element) {
+    element = document.createElement('meta')
+    element.setAttribute(attribute, key)
+    document.head.appendChild(element)
+  }
+
+  element.setAttribute('content', value)
+}
+
 function App() {
   const [locale, setLocale] = useState<Locale>(getInitialLocale)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -609,8 +641,18 @@ function App() {
   ]
 
   useEffect(() => {
+    const seo = contentByLocale[locale].seo
+
     window.localStorage.setItem(LOCALE_STORAGE_KEY, locale)
     document.documentElement.lang = locale === 'zh' ? 'zh-Hant' : 'en'
+    document.title = seo.title
+
+    setMetaContent('name', 'description', seo.description)
+    setMetaContent('property', 'og:title', seo.title)
+    setMetaContent('property', 'og:description', seo.description)
+    setMetaContent('property', 'og:locale', seo.ogLocale)
+    setMetaContent('name', 'twitter:title', seo.title)
+    setMetaContent('name', 'twitter:description', seo.description)
   }, [locale])
 
   useEffect(() => {
@@ -704,7 +746,9 @@ function App() {
       {/* Header */}
       <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
         <nav className="navbar">
-          <h1 className="logo-text">BLUZ TECH</h1>
+          <a href="#about" className="logo-text" onClick={handleNavLinkClick}>
+            BLUZ TECH
+          </a>
 
           <button
             type="button"
@@ -766,170 +810,172 @@ function App() {
         </nav>
       </header>
 
-      {/* Hero Section */}
-      <section className="hero">
-        <div className="hero-content">
-          <h2>
-            {content.hero.greeting} <strong>{content.hero.name}</strong>
-          </h2>
-          <p>
-            {content.hero.roleLine}
-            {content.hero.detailLine ? (
-              <>
-                <br />
-                {content.hero.detailLine}
-              </>
-            ) : null}
-          </p>
-          <div className="hero-divider"></div>
-        </div>
-      </section>
+      <main id="main-content">
+        {/* Hero Section */}
+        <section className="hero">
+          <div className="hero-content">
+            <h1>
+              {content.hero.greeting} <strong>{content.hero.name}</strong>
+            </h1>
+            <p>
+              {content.hero.roleLine}
+              {content.hero.detailLine ? (
+                <>
+                  <br />
+                  {content.hero.detailLine}
+                </>
+              ) : null}
+            </p>
+            <div className="hero-divider"></div>
+          </div>
+        </section>
 
-      {/* About Section */}
-      <section id="about" className="about">
-        <div className="container">
-          <h2>{content.about.title}</h2>
-          <div className="about-wrapper">
-            <div className="about-image">
-              <img src="/Bluz_Lan.jpg" alt={content.about.imageAlt} />
-            </div>
-            <div className="about-content">
-              {content.about.paragraphs.map((paragraph, index) => (
-                <p key={`${locale}-about-${index}`}>{paragraph}</p>
-              ))}
+        {/* About Section */}
+        <section id="about" className="about">
+          <div className="container">
+            <h2>{content.about.title}</h2>
+            <div className="about-wrapper">
+              <div className="about-image">
+                <img src="/Bluz_Lan.jpg" alt={content.about.imageAlt} />
+              </div>
+              <div className="about-content">
+                {content.about.paragraphs.map((paragraph, index) => (
+                  <p key={`${locale}-about-${index}`}>{paragraph}</p>
+                ))}
 
-              <div className="summary-card">
-                <h3>{content.summaryTitle}</h3>
-                <ul className="summary-list">
-                  {content.summaryBullets.map((bullet) => (
-                    <li key={bullet}>{bullet}</li>
-                  ))}
-                </ul>
+                <div className="summary-card">
+                  <h3>{content.summaryTitle}</h3>
+                  <ul className="summary-list">
+                    {content.summaryBullets.map((bullet) => (
+                      <li key={bullet}>{bullet}</li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Experience Section */}
-      <section id="experience" className="experience">
-        <div className="container">
-          <h2>{content.experienceTitle}</h2>
-          <div className="experience-timeline">
-            {content.experiences.map((experience) => (
-              <article key={`${experience.company}-${experience.title}`} className="experience-card">
-                <header className="experience-header">
-                  <div>
-                    <h3>{experience.title}</h3>
-                    <p className="experience-company">{experience.company}</p>
-                  </div>
-                  <span className="experience-type">{experience.employmentType}</span>
-                </header>
-
-                <div className="experience-segments">
-                  {experience.segments.map((segment) => (
-                    <div key={`${experience.company}-${segment.period}`} className="experience-segment">
-                      <p className="experience-period">{segment.period}</p>
-                      <ul className="experience-bullets">
-                        {segment.bullets.map((bullet) => (
-                          <li key={bullet}>{bullet}</li>
-                        ))}
-                      </ul>
+        {/* Experience Section */}
+        <section id="experience" className="experience">
+          <div className="container">
+            <h2>{content.experienceTitle}</h2>
+            <div className="experience-timeline">
+              {content.experiences.map((experience) => (
+                <article key={`${experience.company}-${experience.title}`} className="experience-card">
+                  <header className="experience-header">
+                    <div>
+                      <h3>{experience.title}</h3>
+                      <p className="experience-company">{experience.company}</p>
                     </div>
-                  ))}
+                    <span className="experience-type">{experience.employmentType}</span>
+                  </header>
+
+                  <div className="experience-segments">
+                    {experience.segments.map((segment) => (
+                      <div key={`${experience.company}-${segment.period}`} className="experience-segment">
+                        <p className="experience-period">{segment.period}</p>
+                        <ul className="experience-bullets">
+                          {segment.bullets.map((bullet) => (
+                            <li key={bullet}>{bullet}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Skills Section */}
+        <section id="skills" className="skills">
+          <div className="container">
+            <h2>{content.skillsTitle}</h2>
+            <div className="skills-grid">
+              {content.skills.map((skillGroup) => (
+                <div key={skillGroup.category} className="skill-card">
+                  <h3>{skillGroup.category}</h3>
+                  <ul>
+                    {skillGroup.items.map((item) => (
+                      <li key={item}>
+                        <span className="skill-dot"></span>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-              </article>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Skills Section */}
-      <section id="skills" className="skills">
-        <div className="container">
-          <h2>{content.skillsTitle}</h2>
-          <div className="skills-grid">
-            {content.skills.map((skillGroup) => (
-              <div key={skillGroup.category} className="skill-card">
-                <h3>{skillGroup.category}</h3>
-                <ul>
-                  {skillGroup.items.map((item) => (
-                    <li key={item}>
-                      <span className="skill-dot"></span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Projects Section */}
-      <section id="projects" className="projects">
-        <div className="container">
-          <h2>{content.projectsTitle}</h2>
-          <div className="projects-grid">
-            {content.projects.map((project) => (
-              <div key={project.title} className="project-card">
-                <div className="project-header">
-                  <h3>{project.title}</h3>
-                  <div className="project-accent"></div>
+        {/* Projects Section */}
+        <section id="projects" className="projects">
+          <div className="container">
+            <h2>{content.projectsTitle}</h2>
+            <div className="projects-grid">
+              {content.projects.map((project) => (
+                <div key={project.title} className="project-card">
+                  <div className="project-header">
+                    <h3>{project.title}</h3>
+                    <div className="project-accent"></div>
+                  </div>
+                  <p>{project.description}</p>
+                  <div className="technologies">
+                    {project.technologies.map((tech) => (
+                      <span key={tech} className="tech-tag">{tech}</span>
+                    ))}
+                  </div>
                 </div>
-                <p>{project.description}</p>
-                <div className="technologies">
-                  {project.technologies.map((tech) => (
-                    <span key={tech} className="tech-tag">{tech}</span>
-                  ))}
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Credentials Section */}
-      <section id="credentials" className="credentials">
-        <div className="container">
-          <h2>{content.credentialsTitle}</h2>
-          <div className="credentials-grid">
-            {content.credentials.map((group) => (
-              <article key={group.title} className="credential-card">
-                <h3>{group.title}</h3>
-                <ul>
-                  {group.items.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </article>
-            ))}
+        {/* Credentials Section */}
+        <section id="credentials" className="credentials">
+          <div className="container">
+            <h2>{content.credentialsTitle}</h2>
+            <div className="credentials-grid">
+              {content.credentials.map((group) => (
+                <article key={group.title} className="credential-card">
+                  <h3>{group.title}</h3>
+                  <ul>
+                    {group.items.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </article>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Contact Section */}
-      <section id="contact" className="contact">
-        <div className="container">
-          <h2>{content.contact.title}</h2>
-          <p className="contact-subtitle">{content.contact.subtitle}</p>
-          <div className="contact-methods">
-            {content.contactMethods.map((method) => (
-              <a key={method.label} href={method.href} className="contact-method">
-                <span className="contact-method-label">{method.label}</span>
-                <span className="contact-method-value">{method.value}</span>
-              </a>
-            ))}
+        {/* Contact Section */}
+        <section id="contact" className="contact">
+          <div className="container">
+            <h2>{content.contact.title}</h2>
+            <p className="contact-subtitle">{content.contact.subtitle}</p>
+            <div className="contact-methods">
+              {content.contactMethods.map((method) => (
+                <a key={method.label} href={method.href} className="contact-method">
+                  <span className="contact-method-label">{method.label}</span>
+                  <span className="contact-method-value">{method.value}</span>
+                </a>
+              ))}
+            </div>
+            <div className="contact-links">
+              {content.socials.map((social) => (
+                <a key={social.name} href={social.url} target="_blank" rel="noopener noreferrer" className="contact-link">
+                  <span>{social.name}</span>
+                </a>
+              ))}
+            </div>
           </div>
-          <div className="contact-links">
-            {content.socials.map((social) => (
-              <a key={social.name} href={social.url} target="_blank" rel="noopener noreferrer" className="contact-link">
-                <span>{social.name}</span>
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
+        </section>
+      </main>
 
       {/* Footer */}
       <footer className="footer">
