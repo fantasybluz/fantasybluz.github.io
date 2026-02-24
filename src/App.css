@@ -464,7 +464,7 @@ section h2::after {
   border: 1px solid rgba(84, 110, 122, 0.2);
   padding: 2rem;
   border-radius: 2px;
-  backdropfilter: blur(10px);
+  backdrop-filter: blur(10px);
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
@@ -943,7 +943,5 @@ section h2::after {
 
   .footer p {
     font-size: 0.85rem;
-  }
-}
   }
 }
