@@ -137,7 +137,7 @@ const contentByLocale: Record<Locale, PageContent> = {
       imageAlt: 'Bluz Lan',
       paragraphs: [
         '我是藍詠弘（Bluz Lan），具備後端、前端、雲端平台、DevOps 與機器學習整合能力的軟體工程師。',
-        '目前任職於緯創資通 Chthonia 團隊，主要負責 OpenStack、Kubernetes、GPU 節點與儲存權限策略，並持續參與企業系統開發、敏捷協作與跨團隊交付。',
+        '目前任職於緯創資通 Chthonia 團隊，負責 OpenStack 與 Kubernetes 平台建置、GPU 節點納管及儲存權限策略設計，並持續參與企業系統開發、敏捷流程與跨團隊協作交付。',
         '業餘時間持續投入 AI Agent 相關研究與實作，聚焦流程自動化、任務協作與落地應用。'
       ]
     },
@@ -166,11 +166,10 @@ const contentByLocale: Record<Locale, PageContent> = {
           {
             period: '2025 年 9 月 - 至今',
             bullets: [
-              '建置與維運 OpenStack 環境（虛擬機、網路、儲存配置）。',
-              '規劃與架設 Kubernetes 叢集，作為 AIDC AI 工作負載的基礎平台。',
-              '建立 GPU Node（驅動、容器化環境、叢集整合），提供 AI/ML 工作負載使用。',
-              '使用 Golang 搭配 Gin 開發 API，並結合 Gophercloud 進行 OpenStack 服務整合。',
-              '設計 Storage 權限管控策略，針對使用者 / 專案 / Namespace / Volume 制定權限與配額。'
+              '開發 Go/Gin 中介層 API，整合 OpenStack（Keystone、Ironic、Nova），實現多叢集統一管理。',
+              '建構 Next.js + TypeScript 前端 Monorepo（Turborepo + pnpm），涵蓋 Admin Portal 與 Service Portal。',
+              '實作 WebSocket BMC Console（VNC/Serial），支援即時遠端裸機管理與維運排錯。',
+              '設計 GitHub Actions CI/CD Pipeline，涵蓋 Lint、Unit Test、E2E Test、Security Scan、Multi-arch Docker Build 與 Helm GitOps 部署。'
             ]
           }
         ]
@@ -429,11 +428,10 @@ const contentByLocale: Record<Locale, PageContent> = {
           {
             period: 'Sep 2025 - Present',
             bullets: [
-              'Built and operated OpenStack environments for compute, networking, and storage services.',
-              'Planned and deployed Kubernetes clusters for AIDC AI workloads.',
-              'Onboarded GPU nodes including drivers, container runtime, and cluster integration.',
-              'Built APIs with Golang and Gin, and integrated OpenStack services using Gophercloud.',
-              'Designed storage ACL and quota strategies for users, projects, namespaces, and volumes.'
+              'Developed a Go/Gin middleware API layer integrating OpenStack (Keystone, Ironic, Nova) to provide unified multi-cluster management APIs.',
+              'Built a Next.js + TypeScript frontend monorepo (Turborepo + pnpm) for both the Admin Portal and Service Portal.',
+              'Implemented a WebSocket BMC console (VNC/Serial) for real-time remote bare-metal operations and troubleshooting.',
+              'Designed a GitHub Actions CI/CD pipeline covering linting, unit tests, E2E tests, security scanning, multi-arch Docker builds, and Helm-based GitOps deployments.'
             ]
           }
         ]
