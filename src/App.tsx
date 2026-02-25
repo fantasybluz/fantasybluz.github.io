@@ -68,7 +68,6 @@ interface PageContent {
   hero: {
     greeting: string
     name: string
-    roleLine: string
     detailLine: string
   }
   about: {
@@ -131,8 +130,7 @@ const contentByLocale: Record<Locale, PageContent> = {
     hero: {
       greeting: 'Hi, 我是',
       name: 'Bluz',
-      roleLine: '目前任職於緯創資通 Chthonia 團隊，專注於 OpenStack Cluster／Node 管理與 Infra 自動化整合，協助平台串接各類基礎設施服務。',
-      detailLine: ''
+      detailLine: '「簡單，往往比複雜更難做到。」— Steve Jobs'
     },
     about: {
       title: '關於我',
@@ -395,8 +393,7 @@ const contentByLocale: Record<Locale, PageContent> = {
     hero: {
       greeting: 'Hi, I am',
       name: 'Bluz',
-      roleLine: 'Currently on the Chthonia team at Wistron ITS, focusing on OpenStack cluster/node operations and infrastructure automation across core platform services.',
-      detailLine: ''
+      detailLine: '"Simple can be harder than complex." — Steve Jobs'
     },
     about: {
       title: 'About Me',
@@ -802,15 +799,7 @@ function App() {
             <h1>
               {content.hero.greeting} <strong>{content.hero.name}</strong>
             </h1>
-            <p>
-              {content.hero.roleLine}
-              {content.hero.detailLine ? (
-                <>
-                  <br />
-                  {content.hero.detailLine}
-                </>
-              ) : null}
-            </p>
+            {content.hero.detailLine ? <p>{content.hero.detailLine}</p> : null}
             <div className="hero-divider"></div>
           </div>
         </section>

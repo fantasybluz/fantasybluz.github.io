@@ -1,74 +1,140 @@
 # Bluz Lan Portfolio
 
-This is Bluz Lan's personal portfolio and resume site, built with React + TypeScript + Vite, with bilingual content support (Chinese/English) and SEO optimization.
+Production website: <https://fantasybluz.github.io/>
 
-Website: <https://fantasybluz.github.io/>
+## 1. Overview
 
-## Features
+This repository contains a static portfolio/resume website implemented with React + TypeScript + Vite.
+The site supports bilingual content (zh/en), responsive layouts, and SEO-oriented metadata for search and social sharing.
 
-- Chinese/English language switch with locale persistence
-- Responsive layout (desktop/tablet/mobile)
-- Sticky navbar with translucent state on scroll
-- Resume sections: About, Experience, Skills, Projects, Highlights, Contact
-- SEO enhancements (meta / Open Graph / Twitter / JSON-LD / sitemap / robots)
-- Google Search Console HTML verification support
+## 2. Tech Stack
 
-## Tech Stack
+- Runtime/UI: React 19
+- Language: TypeScript 5
+- Build tool: Vite 7
+- Linting: ESLint 9
+- CSS linting: Stylelint 17
+- CI/CD: GitHub Actions (deploy to GitHub Pages)
 
-- React 19
-- TypeScript 5
-- Vite 7
-- ESLint 9
-- Stylelint 17
+## 3. System Architecture
 
-## Local Development
+- Entry point: `src/main.tsx`
+- Application container and content model: `src/App.tsx`
+- Component styling: `src/App.css`
+- Global styling: `src/index.css`
+- Static assets: `public/`
+- HTML shell + SEO metadata: `index.html`
 
-Node.js 20+ is recommended.
+### 3.1 Content Model
+
+The primary content source is `contentByLocale` in `src/App.tsx`:
+
+- `zh` and `en` locale objects
+- Shared section schema (`hero`, `about`, `experience`, `skills`, `projects`, `credentials`, `contact`)
+- Locale-specific SEO content (`title`, `description`, `ogLocale`)
+
+## 4. Prerequisites
+
+- Node.js 20+ (recommended)
+- npm 10+ (recommended)
+
+## 5. Local Development
+
+Install dependencies:
 
 ```bash
 npm install
+```
+
+Start development server:
+
+```bash
 npm run dev
 ```
 
-Dev URL: <http://localhost:5173>
+Default local URL: <http://localhost:5173>
 
-## Available Scripts
+## 6. Build, Validate, and Preview
+
+### 6.1 Build
 
 ```bash
-npm run dev       # Start development server
-npm run build     # Build production files into dist
-npm run preview   # Preview production build locally
-npm run lint      # Lint TypeScript/JavaScript
-npm run lint:css  # Lint and auto-fix CSS
+npm run build
 ```
 
-## Main Editable Files
+Output directory: `dist/`
 
-- Main resume/content data: `src/App.tsx` (`contentByLocale`)
-- Main component styles: `src/App.css`
-- Global styles: `src/index.css`
-- Profile image: `public/Bluz_Lan.jpg`
-- Site icon: `public/logo.png`
+### 6.2 Lint (TS/JS)
 
-## SEO & Search Setup
+```bash
+npm run lint
+```
 
-- Main meta tags and structured data: `index.html`
-- Robots file: `public/robots.txt`
-- Sitemap: `public/sitemap.xml`
-- Google verification file: `public/google12b722e4207bfe96.html`
+### 6.3 Lint (CSS)
 
-After deployment, verify the Google file at:
+```bash
+npm run lint:css
+```
+
+### 6.4 Preview Production Build
+
+```bash
+npm run preview
+```
+
+## 7. SEO and Search Configuration
+
+SEO resources are managed in:
+
+- `index.html`
+  - `meta` description/robots/canonical
+  - Open Graph and Twitter cards
+  - JSON-LD (`Person`)
+- `public/robots.txt`
+- `public/sitemap.xml`
+- `public/google12b722e4207bfe96.html` (Google Search Console HTML verification)
+
+Post-deploy verification URL:
 
 `https://fantasybluz.github.io/google12b722e4207bfe96.html`
 
-## Deployment (GitHub Pages)
+## 8. Deployment Pipeline
 
-This project is configured with GitHub Actions to deploy automatically when `main` is updated:
+Deployment is automated by GitHub Actions:
 
-- Workflow: `.github/workflows/deploy.yml`
-- Build output: `dist`
-- Publish branch: `gh-pages`
+- Workflow file: `.github/workflows/deploy.yml`
+- Trigger: push to `main`
+- Build command: `npm run build`
+- Published artifact directory: `dist/`
+- Published branch: `gh-pages`
 
-## License
+## 9. Repository Structure
+
+```text
+.
+├── .github/workflows/deploy.yml
+├── index.html
+├── public/
+│   ├── Bluz_Lan.jpg
+│   ├── logo.png
+│   ├── robots.txt
+│   ├── sitemap.xml
+│   └── google12b722e4207bfe96.html
+├── src/
+│   ├── App.tsx
+│   ├── App.css
+│   ├── index.css
+│   └── main.tsx
+└── package.json
+```
+
+## 10. Common Update Scenarios
+
+- Update resume content: edit `contentByLocale` in `src/App.tsx`
+- Update profile image: replace `public/Bluz_Lan.jpg`
+- Update favicon/logo: replace `public/logo.png`
+- Update SEO metadata: edit `index.html`, `public/robots.txt`, `public/sitemap.xml`
+
+## 11. License
 
 MIT
