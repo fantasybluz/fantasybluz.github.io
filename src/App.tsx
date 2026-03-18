@@ -708,19 +708,32 @@ function App() {
 
   return (
     <div className="app">
-      {/* Background Geometric Shapes */}
-      <div className="geometric-background">
-        <div className="geometric-shape shape-1"></div>
-        <div className="geometric-shape shape-2"></div>
-        <div className="geometric-shape shape-3"></div>
-        <div className="geometric-shape shape-4"></div>
-        <div className="geometric-shape shape-5"></div>
-        <div className="geometric-shape shape-6"></div>
-        <div className="geometric-shape shape-7"></div>
-        <div className="geometric-shape shape-8"></div>
-        <div className="geometric-shape shape-9"></div>
-        <div className="geometric-shape shape-10"></div>
-        <div className="tech-grid"></div>
+      {/* Background Effects — Dot Pattern + Meteor Shower + Glow Orbs */}
+      <div className="bg-effects">
+        <div className="grid-dots"></div>
+        <div className="glow-orb orb-1"></div>
+        <div className="glow-orb orb-2"></div>
+        <div className="glow-orb orb-3"></div>
+        <span className="meteor m-1"></span>
+        <span className="meteor m-2"></span>
+        <span className="meteor m-3"></span>
+        <span className="meteor m-4"></span>
+        <span className="meteor m-5"></span>
+        <span className="meteor m-6"></span>
+        <span className="meteor m-7"></span>
+        <span className="meteor m-8"></span>
+        <span className="meteor m-9"></span>
+        <span className="meteor m-10"></span>
+        <span className="meteor m-11"></span>
+        <span className="meteor m-12"></span>
+        <span className="meteor m-13"></span>
+        <span className="meteor m-14"></span>
+        <span className="meteor m-15"></span>
+        <span className="meteor m-16"></span>
+        <span className="meteor m-17"></span>
+        <span className="meteor m-18"></span>
+        <span className="meteor m-19"></span>
+        <span className="meteor m-20"></span>
       </div>
 
       {/* Header */}
@@ -795,7 +808,7 @@ function App() {
         <section className="hero">
           <div className="hero-content">
             <h1>
-              {content.hero.greeting} <strong>{content.hero.name}</strong>
+              {content.hero.greeting} <strong>{content.hero.name}</strong><span className="cursor" aria-hidden="true"></span>
             </h1>
             {content.hero.detailLine ? <p>{content.hero.detailLine}</p> : null}
             <div className="hero-divider"></div>
