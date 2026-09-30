@@ -3,10 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/logo.png" />
+    <link rel="apple-touch-icon" href="/logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Bluz Lan（藍詠弘）個人履歷網站：Software Engineer，專長 Backend、Frontend、Cloud、DevOps 與 ML，聚焦 OpenStack、Kubernetes、GPU 與平台整合。"
+      content="藍詠弘（Bluz Lan）個人履歷網站，聚焦後端、前端、雲端、DevOps 與 ML，具 OpenStack、Kubernetes、GPU 平台整合實務經驗。"
     />
     <meta
       name="keywords"
@@ -29,14 +30,17 @@
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Bluz Lan Portfolio" />
-    <meta property="og:title" content="Bluz Lan | Portfolio" />
+    <meta property="og:title" content="藍詠弘 Bluz Lan | 軟體工程師作品集" />
     <meta
       property="og:description"
       content="Bluz Lan（藍詠弘）自我介紹：Software Engineer，專長 Backend、Frontend、Cloud、DevOps 與 ML。"
     />
     <meta property="og:url" content="https://fantasybluz.github.io/" />
     <meta property="og:image" content="https://fantasybluz.github.io/Bluz_Lan.jpg" />
-    <meta property="og:image:alt" content="Bluz Lan portrait" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="800" />
+    <meta property="og:image:height" content="800" />
+    <meta property="og:image:alt" content="藍詠弘 Bluz Lan 個人照片" />
     <meta property="og:locale" content="zh_TW" />
     <meta property="og:locale:alternate" content="en_US" />
 
@@ -47,27 +51,70 @@
       content="Software Engineer with experience in OpenStack, Kubernetes, GPU platform integration, and full-stack system delivery."
     />
     <meta name="twitter:image" content="https://fantasybluz.github.io/Bluz_Lan.jpg" />
+    <meta name="twitter:image:alt" content="藍詠弘 Bluz Lan 個人照片" />
 
-    <title>Bluz Lan | Software Engineer Portfolio</title>
+    <title>藍詠弘 Bluz Lan | 軟體工程師作品集</title>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Bluz Lan",
-        "alternateName": "藍詠弘",
-        "url": "https://fantasybluz.github.io/",
-        "image": "https://fantasybluz.github.io/Bluz_Lan.jpg",
-        "jobTitle": "Software Engineer",
-        "description": "Software Engineer with full-stack, cloud platform, DevOps, and ML experience.",
-        "worksFor": {
-          "@type": "Organization",
-          "name": "Wistron ITS"
-        },
-        "email": "mailto:fantasybluz@gmail.com",
-        "sameAs": [
-          "https://www.linkedin.com/in/yung-hung-lan-556575146/",
-          "https://www.instagram.com/fantasybluzz/",
-          "https://www.instagram.com/bluz_computer_studio/"
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://fantasybluz.github.io/#website",
+            "url": "https://fantasybluz.github.io/",
+            "name": "Bluz Lan Portfolio",
+            "inLanguage": ["zh-Hant", "en"],
+            "publisher": { "@id": "https://fantasybluz.github.io/#person" }
+          },
+          {
+            "@type": "ProfilePage",
+            "@id": "https://fantasybluz.github.io/#profilepage",
+            "url": "https://fantasybluz.github.io/",
+            "name": "藍詠弘 Bluz Lan | 軟體工程師作品集",
+            "isPartOf": { "@id": "https://fantasybluz.github.io/#website" },
+            "mainEntity": { "@id": "https://fantasybluz.github.io/#person" }
+          },
+          {
+            "@type": "Person",
+            "@id": "https://fantasybluz.github.io/#person",
+            "name": "Bluz Lan",
+            "alternateName": ["藍詠弘", "Yung-Hung Lan"],
+            "url": "https://fantasybluz.github.io/",
+            "image": "https://fantasybluz.github.io/Bluz_Lan.jpg",
+            "jobTitle": "Software Engineer",
+            "description": "Software Engineer with full-stack, cloud platform, DevOps, and ML experience.",
+            "worksFor": {
+              "@type": "Organization",
+              "name": "Wistron",
+              "url": "https://www.wistron.com/"
+            },
+            "alumniOf": {
+              "@type": "CollegeOrUniversity",
+              "name": "National Chin-Yi University of Technology",
+              "alternateName": "國立勤益科技大學"
+            },
+            "knowsAbout": [
+              "Golang",
+              "TypeScript",
+              "React",
+              "Node.js",
+              "OpenStack",
+              "Kubernetes",
+              "GPU Cluster Management",
+              "DevOps",
+              "CI/CD",
+              "PostgreSQL",
+              "Machine Learning"
+            ],
+            "knowsLanguage": ["zh-Hant", "en"],
+            "email": "mailto:fantasybluz@gmail.com",
+            "sameAs": [
+              "https://www.linkedin.com/in/yung-hung-lan-556575146/",
+              "https://github.com/fantasybluz",
+              "https://www.instagram.com/fantasybluzz/",
+              "https://www.instagram.com/bluz_computer_studio/"
+            ]
+          }
         ]
       }
     </script>

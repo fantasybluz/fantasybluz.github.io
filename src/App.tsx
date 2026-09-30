@@ -134,7 +134,7 @@ const contentByLocale: Record<Locale, PageContent> = {
     },
     about: {
       title: '關於我',
-      imageAlt: 'Bluz Lan',
+      imageAlt: '藍詠弘 Bluz Lan 個人照片',
       paragraphs: [
         '我是藍詠弘（Bluz Lan），具備後端、前端、雲端平台、DevOps 與機器學習整合能力的軟體工程師。',
         '目前任職於緯創資通 Chthonia 團隊，負責 OpenStack 與 Kubernetes 平台建置、GPU 節點納管及儲存權限策略設計，並持續參與企業系統開發、敏捷流程與跨團隊協作交付。',
@@ -396,7 +396,7 @@ const contentByLocale: Record<Locale, PageContent> = {
     },
     about: {
       title: 'About Me',
-      imageAlt: 'Bluz Lan',
+      imageAlt: 'Portrait of Bluz Lan',
       paragraphs: [
         'I am Bluz Lan, a software engineer with hands-on experience across backend, frontend, cloud platform engineering, DevOps, and ML-related work.',
         'I currently work on Wistron Chthonia/AIDC initiatives focused on OpenStack, Kubernetes, GPU node onboarding, and storage access control.',
@@ -821,7 +821,7 @@ function App() {
             <h2>{content.about.title}</h2>
             <div className="about-wrapper">
               <div className="about-image">
-                <img src="/Bluz_Lan.jpg" alt={content.about.imageAlt} />
+                <img src="/Bluz_Lan.jpg" alt={content.about.imageAlt} width={800} height={800} decoding="async" />
               </div>
               <div className="about-content">
                 {content.about.paragraphs.map((paragraph, index) => (
@@ -953,7 +953,7 @@ function App() {
             </div>
             <div className="contact-links">
               {content.socials.map((social) => (
-                <a key={social.name} href={social.url} target="_blank" rel="noopener noreferrer" className="contact-link">
+                <a key={social.name} href={social.url} target="_blank" rel="me noopener noreferrer" className="contact-link">
                   <span>{social.name}</span>
                 </a>
               ))}
