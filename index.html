@@ -3,10 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/logo.png" />
+    <link rel="apple-touch-icon" href="/logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Bluz Lan（藍詠弘）個人履歷網站：Software Engineer，專長 Backend、Frontend、Cloud、DevOps 與 ML，聚焦 OpenStack、Kubernetes、GPU 與平台整合。"
+      content="藍詠弘（Bluz Lan）個人履歷網站，聚焦後端、前端、雲端、DevOps 與 ML，具 OpenStack、Kubernetes、GPU 平台整合實務經驗。"
     />
     <meta
       name="keywords"
@@ -25,56 +26,105 @@
     <meta name="format-detection" content="telephone=no" />
 
     <link rel="canonical" href="https://fantasybluz.github.io/" />
+    <link rel="alternate" hreflang="zh-Hant" href="https://fantasybluz.github.io/" />
+    <link rel="alternate" hreflang="en" href="https://fantasybluz.github.io/en/" />
+    <link rel="alternate" hreflang="x-default" href="https://fantasybluz.github.io/" />
     <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Bluz Lan Portfolio" />
-    <meta property="og:title" content="Bluz Lan | Portfolio" />
+    <meta property="og:title" content="藍詠弘 Bluz Lan | 軟體工程師作品集" />
     <meta
       property="og:description"
-      content="Bluz Lan（藍詠弘）自我介紹：Software Engineer，專長 Backend、Frontend、Cloud、DevOps 與 ML。"
+      content="藍詠弘（Bluz Lan）個人履歷網站，聚焦後端、前端、雲端、DevOps 與 ML，具 OpenStack、Kubernetes、GPU 平台整合實務經驗。"
     />
     <meta property="og:url" content="https://fantasybluz.github.io/" />
     <meta property="og:image" content="https://fantasybluz.github.io/Bluz_Lan.jpg" />
-    <meta property="og:image:alt" content="Bluz Lan portrait" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="800" />
+    <meta property="og:image:height" content="800" />
+    <meta property="og:image:alt" content="藍詠弘 Bluz Lan 個人照片" />
     <meta property="og:locale" content="zh_TW" />
     <meta property="og:locale:alternate" content="en_US" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Bluz Lan | Software Engineer Portfolio" />
+    <meta name="twitter:title" content="藍詠弘 Bluz Lan | 軟體工程師作品集" />
     <meta
       name="twitter:description"
-      content="Software Engineer with experience in OpenStack, Kubernetes, GPU platform integration, and full-stack system delivery."
+      content="藍詠弘（Bluz Lan）個人履歷網站，聚焦後端、前端、雲端、DevOps 與 ML，具 OpenStack、Kubernetes、GPU 平台整合實務經驗。"
     />
     <meta name="twitter:image" content="https://fantasybluz.github.io/Bluz_Lan.jpg" />
+    <meta name="twitter:image:alt" content="藍詠弘 Bluz Lan 個人照片" />
 
-    <title>Bluz Lan | Software Engineer Portfolio</title>
+    <title>藍詠弘 Bluz Lan | 軟體工程師作品集</title>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Bluz Lan",
-        "alternateName": "藍詠弘",
-        "url": "https://fantasybluz.github.io/",
-        "image": "https://fantasybluz.github.io/Bluz_Lan.jpg",
-        "jobTitle": "Software Engineer",
-        "description": "Software Engineer with full-stack, cloud platform, DevOps, and ML experience.",
-        "worksFor": {
-          "@type": "Organization",
-          "name": "Wistron ITS"
-        },
-        "email": "mailto:fantasybluz@gmail.com",
-        "sameAs": [
-          "https://www.linkedin.com/in/yung-hung-lan-556575146/",
-          "https://www.instagram.com/fantasybluzz/",
-          "https://www.instagram.com/bluz_computer_studio/"
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://fantasybluz.github.io/#website",
+            "url": "https://fantasybluz.github.io/",
+            "name": "Bluz Lan Portfolio",
+            "inLanguage": ["zh-Hant", "en"],
+            "publisher": { "@id": "https://fantasybluz.github.io/#person" }
+          },
+          {
+            "@type": "ProfilePage",
+            "@id": "https://fantasybluz.github.io/#profilepage",
+            "url": "https://fantasybluz.github.io/",
+            "name": "藍詠弘 Bluz Lan | 軟體工程師作品集",
+            "isPartOf": { "@id": "https://fantasybluz.github.io/#website" },
+            "mainEntity": { "@id": "https://fantasybluz.github.io/#person" }
+          },
+          {
+            "@type": "Person",
+            "@id": "https://fantasybluz.github.io/#person",
+            "name": "Bluz Lan",
+            "alternateName": ["藍詠弘", "Yung-Hung Lan"],
+            "url": "https://fantasybluz.github.io/",
+            "image": "https://fantasybluz.github.io/Bluz_Lan.jpg",
+            "jobTitle": "Software Engineer",
+            "description": "Software Engineer with full-stack, cloud platform, DevOps, and ML experience.",
+            "worksFor": {
+              "@type": "Organization",
+              "name": "Wistron",
+              "url": "https://www.wistron.com/"
+            },
+            "alumniOf": {
+              "@type": "CollegeOrUniversity",
+              "name": "National Chin-Yi University of Technology",
+              "alternateName": "國立勤益科技大學"
+            },
+            "knowsAbout": [
+              "Golang",
+              "TypeScript",
+              "React",
+              "Node.js",
+              "OpenStack",
+              "Kubernetes",
+              "GPU Cluster Management",
+              "DevOps",
+              "CI/CD",
+              "PostgreSQL",
+              "Machine Learning"
+            ],
+            "knowsLanguage": ["zh-Hant", "en"],
+            "email": "mailto:fantasybluz@gmail.com",
+            "sameAs": [
+              "https://www.linkedin.com/in/yung-hung-lan-556575146/",
+              "https://github.com/fantasybluz",
+              "https://www.instagram.com/fantasybluzz/",
+              "https://www.instagram.com/bluz_computer_studio/"
+            ]
+          }
         ]
       }
     </script>
-    <script type="module" crossorigin src="/assets/index-D7xRrXIg.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-CW_or4t4.css">
+    <script type="module" crossorigin src="/assets/index-BzxIquV6.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-Bsa7Mngx.css">
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root"><link rel="preload" as="image" href="/Bluz_Lan.jpg"/><div class="app"><div class="bg-effects"><div class="grid-dots"></div><div class="glow-orb orb-1"></div><div class="glow-orb orb-2"></div><div class="glow-orb orb-3"></div><span class="meteor m-1"></span><span class="meteor m-2"></span><span class="meteor m-3"></span><span class="meteor m-4"></span><span class="meteor m-5"></span><span class="meteor m-6"></span><span class="meteor m-7"></span><span class="meteor m-8"></span><span class="meteor m-9"></span><span class="meteor m-10"></span><span class="meteor m-11"></span><span class="meteor m-12"></span><span class="meteor m-13"></span><span class="meteor m-14"></span><span class="meteor m-15"></span><span class="meteor m-16"></span><span class="meteor m-17"></span><span class="meteor m-18"></span><span class="meteor m-19"></span><span class="meteor m-20"></span></div><header class="header "><nav class="navbar"><a href="#about" class="logo-text">BLUZ TECH</a><button type="button" class="menu-toggle " aria-expanded="false" aria-controls="primary-navigation" aria-label="開啟選單"><span></span><span></span><span></span></button><div id="primary-navigation" class="nav-right "><div class="nav-center"><ul class="nav-links"><li><a href="#about" class="active" aria-current="page">關於</a></li><li><a href="#experience" class="">經歷</a></li><li><a href="#skills" class="">技能</a></li><li><a href="#projects" class="">專案</a></li><li><a href="#credentials" class="">履歷</a></li><li><a href="#contact" class="">聯絡</a></li></ul></div><div class="language-switcher" role="group" aria-label="切換語言"><a href="/" hrefLang="zh-Hant" lang="zh-Hant" class="lang-btn active" aria-current="true">中</a><span class="lang-divider">/</span><a href="/en/" hrefLang="en" lang="en" class="lang-btn ">EN</a></div></div></nav></header><main id="main-content"><section class="hero"><div class="hero-content"><h1>Hi, 我是<!-- --> <strong>藍詠弘 Bluz</strong><span class="cursor" aria-hidden="true"></span></h1><p>「簡單，往往比複雜更難做到。」— Steve Jobs</p><div class="hero-divider"></div></div></section><section id="about" class="about"><div class="container"><h2>關於我</h2><div class="about-wrapper"><div class="about-image"><img src="/Bluz_Lan.jpg" alt="藍詠弘 Bluz Lan 個人照片" width="800" height="800" decoding="async"/></div><div class="about-content"><p>我是藍詠弘（Bluz Lan），具備後端、前端、雲端平台、DevOps 與機器學習整合能力的軟體工程師。</p><p>目前任職於緯創資通 Chthonia 團隊，負責 OpenStack 與 Kubernetes 平台建置、GPU 節點納管及儲存權限策略設計，並持續參與企業系統開發、敏捷流程與跨團隊協作交付。</p><p>業餘時間持續投入 AI Agent 相關研究與實作，聚焦流程自動化、任務協作與落地應用。</p><div class="summary-card"><h3>專業摘要</h3><ul class="summary-list"><li>具備後端 / 前端 / 雲端 / DevOps / ML 綜合背景，能從平台到應用端進行整合開發。</li><li>目前於緯創 Chthonia / AIDC 專案負責 OpenStack、Kubernetes、GPU Node 與 Storage 權限規劃與落地。</li><li>曾參與企業內部系統（DPOM、SPOS）、行動裝置 App、ERP 系統維護與智慧製造 / 工業物聯網研究計畫。</li><li>於緯創多個專案中實際參與 Scrum 敏捷流程（Sprint 規劃、Daily、Review、Retrospective）。</li></ul></div></div></div></div></section><section id="experience" class="experience"><div class="container"><h2>工作經驗</h2><div class="experience-timeline"><article class="experience-card"><header class="experience-header"><div><h3>軟體工程師（Chthonia / AIDC 團隊）</h3><p class="experience-company">Wistron</p></div><span class="experience-type">全職</span></header><div class="experience-segments"><div class="experience-segment"><p class="experience-period">2025 年 9 月 - 至今</p><ul class="experience-bullets"><li>開發 Go/Gin 中介層 API，整合 OpenStack（Keystone、Ironic、Nova），實現多叢集統一管理。</li><li>建構 Next.js + TypeScript 前端 Monorepo（Turborepo + pnpm），涵蓋 Admin Portal 與 Service Portal。</li><li>實作 WebSocket BMC Console（VNC/Serial），支援即時遠端裸機管理與維運排錯。</li><li>設計 GitHub Actions CI/CD Pipeline，涵蓋 Lint、Unit Test、E2E Test、Security Scan、Multi-arch Docker Build 與 Helm GitOps 部署。</li></ul></div></div></article><article class="experience-card"><header class="experience-header"><div><h3>軟體工程師（DPOM 專案）</h3><p class="experience-company">Wistron</p></div><span class="experience-type">全職</span></header><div class="experience-segments"><div class="experience-segment"><p class="experience-period">2024 年 12 月 - 2025 年 9 月</p><ul class="experience-bullets"><li>參與數位訂單管理系統（DPOM）開發與維運。</li><li>使用 React（TypeScript）開發前端，並以 Node.js（TypeScript）實作後端服務與 RESTful API。</li><li>設計與維護 PostgreSQL 的訂單、交易與報表資料模型，執行查詢優化與索引調校。</li><li>建置角色權限流程與頁面層級存取控制，支援不同事業單位需求。</li><li>於 Scrum 流程中與 PM、前後端與測試協作，以 Sprint 迭代交付功能。</li><li>以 BullMQ 將資料庫同步與報表產生流程改為非同步處理，提升系統效能與使用者體驗。</li></ul></div></div></article><article class="experience-card"><header class="experience-header"><div><h3>軟體工程師（SPOS 專案）</h3><p class="experience-company">Wistron</p></div><span class="experience-type">全職</span></header><div class="experience-segments"><div class="experience-segment"><p class="experience-period">2024 年 8 月 - 2025 年 12 月</p><ul class="experience-bullets"><li>參與物料供應鏈計劃最佳化系統（SPOS）開發。</li><li>系統聚焦於物料資訊查詢、資訊整合平台與報表自動產生。</li><li>前端使用 React + TypeScript 開發畫面與可重用元件。</li><li>後端使用 Node.js + TypeScript 開發 API 與交易流程邏輯。</li><li>資料庫使用 PostgreSQL，支援交易資料與報表查詢。</li><li>依 Scrum 流程進行需求拆解、排程與版本釋出。</li></ul></div></div></article><article class="experience-card"><header class="experience-header"><div><h3>工程師</h3><p class="experience-company">高雄捷運股份有限公司</p></div><span class="experience-type">全職</span></header><div class="experience-segments"><div class="experience-segment"><p class="experience-period">2023 年 7 月 - 2024 年 8 月 · 1 年 2 個月</p><ul class="experience-bullets"><li>開發 ERP 權限控管模組，使用 Vue.js 前端與 Java Spring Web MVC / Spring Boot 後端，資料庫為 DB2。</li><li>整合 MOXA NPort 序列設備伺服器，連接現場設備並提升門禁與監控系統穩定度。</li><li>參與高雄捷運通勤助理 App（Xamarin / .NET Framework），負責 UI 與後端邏輯整合。</li><li>以 paddleOCR 開發首/末班車倒數辨識功能。</li><li>使用 pandas / NumPy 進行運料資料處理與圖形化分析。</li><li>與營運及 IT 團隊釐清需求、於測試環境驗證功能行為，並支援正式環境部署。</li><li>維護既有模組（除錯與重構舊程式碼），提升系統穩定性與可維護性。</li></ul></div></div></article></div></div></section><section id="skills" class="skills"><div class="container"><h2>技能總覽</h2><div class="skills-grid"><div class="skill-card"><h3>程式語言與基礎能力</h3><ul><li><span class="skill-dot"></span>JavaScript</li><li><span class="skill-dot"></span>TypeScript</li><li><span class="skill-dot"></span>Golang（Go）</li><li><span class="skill-dot"></span>Python（機器學習 / 資料處理）</li><li><span class="skill-dot"></span>Java（Spring MVC / Spring Boot）</li><li><span class="skill-dot"></span>C#（.NET Framework / Xamarin）</li></ul></div><div class="skill-card"><h3>後端開發</h3><ul><li><span class="skill-dot"></span>Node.js（TypeScript）</li><li><span class="skill-dot"></span>Express.js（Node.js Framework）</li><li><span class="skill-dot"></span>Golang + Gin API 開發</li><li><span class="skill-dot"></span>Gophercloud（OpenStack SDK）整合</li><li><span class="skill-dot"></span>RESTful API 設計與實作</li><li><span class="skill-dot"></span>Java Spring Web MVC / Spring Boot</li><li><span class="skill-dot"></span>Django / Flask 基本 Web 服務</li></ul></div><div class="skill-card"><h3>前端開發</h3><ul><li><span class="skill-dot"></span>React（TypeScript）</li><li><span class="skill-dot"></span>Vue.js</li><li><span class="skill-dot"></span>Xamarin（.NET Framework）</li><li><span class="skill-dot"></span>企業內部系統 UI / 表單 / 權限頁面開發</li></ul></div><div class="skill-card"><h3>雲端、容器與 DevOps</h3><ul><li><span class="skill-dot"></span>Docker</li><li><span class="skill-dot"></span>Kubernetes</li><li><span class="skill-dot"></span>OpenStack</li><li><span class="skill-dot"></span>Azure DevOps Pipeline</li><li><span class="skill-dot"></span>GitLab CI/CD</li><li><span class="skill-dot"></span>GPU Node 納管與資源管理</li></ul></div><div class="skill-card"><h3>資料庫</h3><ul><li><span class="skill-dot"></span>PostgreSQL</li><li><span class="skill-dot"></span>MySQL</li><li><span class="skill-dot"></span>MariaDB</li><li><span class="skill-dot"></span>MS-SQL</li><li><span class="skill-dot"></span>DB2</li><li><span class="skill-dot"></span>Schema 設計</li><li><span class="skill-dot"></span>索引與效能調校</li></ul></div><div class="skill-card"><h3>開發流程與協作</h3><ul><li><span class="skill-dot"></span>Scrum 敏捷開發</li><li><span class="skill-dot"></span>Sprint 規劃 / Daily / Review / Retro</li><li><span class="skill-dot"></span>Git 版本控制</li><li><span class="skill-dot"></span>Code Review</li><li><span class="skill-dot"></span>跨團隊協作（PM / Infra / QA / RD）</li></ul></div><div class="skill-card"><h3>機器學習與資料處理</h3><ul><li><span class="skill-dot"></span>PyTorch</li><li><span class="skill-dot"></span>TensorFlow</li><li><span class="skill-dot"></span>Scikit-Learn</li><li><span class="skill-dot"></span>Pandas</li><li><span class="skill-dot"></span>NumPy</li><li><span class="skill-dot"></span>paddleOCR</li></ul></div><div class="skill-card"><h3>嵌入式與工控</h3><ul><li><span class="skill-dot"></span>Raspberry Pi</li><li><span class="skill-dot"></span>MCU 基礎開發概念</li><li><span class="skill-dot"></span>MOXA NPort 串接</li><li><span class="skill-dot"></span>IIoT / 智慧製造場域與資安概念</li></ul></div></div></div></section><section id="projects" class="projects"><div class="container"><h2>代表性專案</h2><div class="projects-grid"><div class="project-card"><div class="project-header"><h3>Chthonia</h3><div class="project-accent"></div></div><p>在緯創資通 Chthonia 團隊中開發 AIDC 產品，以 Golang + Gin 開發 API，並結合 Gophercloud 串接 OpenStack 服務；同時整合 Kubernetes 與 GPU 節點，支援 AI/ML 工作負載與多租戶儲存權限管理。</p><div class="technologies"><span class="tech-tag">Golang</span><span class="tech-tag">Gin</span><span class="tech-tag">Gophercloud</span><span class="tech-tag">OpenStack</span><span class="tech-tag">Kubernetes</span><span class="tech-tag">GPU Node</span><span class="tech-tag">Storage ACL</span><span class="tech-tag">Scrum</span></div></div><div class="project-card"><div class="project-header"><h3>DPOM 企業內部訂單管理系統</h3><div class="project-accent"></div></div><p>使用 React + Node.js + PostgreSQL 實作企業系統；透過 BullMQ 將資料同步與報表流程改為非同步，提升效能。</p><div class="technologies"><span class="tech-tag">React</span><span class="tech-tag">TypeScript</span><span class="tech-tag">Node.js</span><span class="tech-tag">PostgreSQL</span><span class="tech-tag">BullMQ</span></div></div><div class="project-card"><div class="project-header"><h3>SPOS 供應鏈計畫最佳化系統</h3><div class="project-accent"></div></div><p>負責物料資訊整合、查詢與報表平台功能，包含前端元件、後端 API 及 PostgreSQL 資料查詢設計。</p><div class="technologies"><span class="tech-tag">React</span><span class="tech-tag">Node.js</span><span class="tech-tag">PostgreSQL</span><span class="tech-tag">REST API</span><span class="tech-tag">Scrum</span></div></div><div class="project-card"><div class="project-header"><h3>高雄捷運 ERP 與行動 App 開發</h3><div class="project-accent"></div></div><p>ERP 權限模組與工控設備串接、通勤助理 App 開發，涵蓋 Vue.js、Spring、DB2、Xamarin 等技術棧。</p><div class="technologies"><span class="tech-tag">Vue.js</span><span class="tech-tag">Spring Boot</span><span class="tech-tag">DB2</span><span class="tech-tag">Xamarin</span><span class="tech-tag">MOXA NPort</span></div></div></div></div></section><section id="credentials" class="credentials"><div class="container"><h2>履歷亮點</h2><div class="credentials-grid"><article class="credential-card"><h3>在職績效</h3><ul><li>2025 年 緯創資通年中績效考察：甲等</li><li>2025 年 緯創資通年末績效考察：甲等</li></ul></article><article class="credential-card"><h3>研究計畫與學術經歷</h3><ul><li>具安全性異質工業物聯網之智慧製造系統場域建置與認證 (2/3)｜MOST 111-2218-E-194-007｜111/06/01 - 112/05/31</li><li>具安全性異質工業物聯網之智慧製造系統場域建置與認證 (1/3)｜MOST 110-2218-E-194-010｜110/11/01 - 111/05/31</li><li>109 科技部-國家實驗研究院專案計畫｜2020/12/01 - 2021/05/31</li></ul></article><article class="credential-card"><h3>學歷</h3><ul><li>國立勤益科技大學 資訊工程系 學士（2020）</li><li>國立勤益科技大學 資訊工程所 碩士（2022）</li></ul></article><article class="credential-card"><h3>競賽與活動</h3><ul><li>2019 ZERO HUNGER 黑客松 技職盃全國大賽 中區賽 佳作</li><li>2019 ZERO HUNGER 黑客松 技職盃全國大賽 全國賽 最佳簡報獎</li><li>108 學年度「資通訊在智慧機械產業之應用營」Java/Android App 基礎課程 助教</li><li>108 學年度「Python 微學分程式設計課程」助教</li><li>110/111 學年度「程式設計與實習」課程 助教</li><li>110 學年度高教深耕磨課師計畫「農業物聯網感測數據資料搜集應用與實作」課程 助教</li><li>110 學年度 國立勤益科大電資學院院專題研究所組 佳作</li><li>2021 ZERO HUNGER 黑客松 技職盃全國大賽 中區賽 評審團大獎</li><li>2021 計算機多媒體綜合能力與人工智慧素養及商務專業應用大賽 全國賽 CIW 大數據分析師組 冠軍</li><li>2021 計算機多媒體綜合能力與人工智慧素養及商務專業應用大賽 中區賽 CIW 大數據分析師組 冠軍</li><li>2021 計算機多媒體綜合能力與人工智慧素養及商務專業應用大賽 中區賽 AIL 人工智慧素養組 冠軍</li><li>2021 專業英(日)文詞彙與聽力能力大賽 中區賽 ICT 組 亞軍</li><li>2021 教育部智慧創新跨域跨校專題研究成果聯合競賽 潛力無限獎（門禁防疫監控系統）</li><li>2022（第十屆）全國計算機多媒體綜合能力與人工智能素養及商務專業應用大賽 中區賽 AIL 組 冠軍</li><li>2022（第十屆）全國計算機多媒體綜合能力與人工智能素養及商務專業應用大賽 全國賽 AIL 組 季軍</li><li>2022 ZERO HUNGER 黑客松 技職盃全國大賽 中區分區賽 入選</li><li>AERC 2022 亞洲智慧型機器人大賽 機器人障礙挑戰大專 C 組 佳作</li><li>2022 第五屆臺中市英文菁英盃（人工智慧組）季軍</li></ul></article><article class="credential-card"><h3>學術研討會文章著作</h3><ul><li>2021：一種基於電腦視覺特徵檢測之人臉圖像去識別化技術（AII2021）</li><li>2021：一種低延遲的非接觸式人機互動方法（ITAOI2021）</li><li>2022：一種非同質化代幣應用於房屋租賃契約平台（AII2022）</li><li>2022：一種非同質化代幣技術應用於會員社群平台（ILT2022）</li></ul></article><article class="credential-card"><h3>論文與專題</h3><ul><li>碩士論文：一種針對自駕車於通信網路攻擊的入侵檢測系統（https://hdl.handle.net/11296/x3tn93）</li><li>大學專題：基於機器學習以單鏡頭辨識活體人臉系統</li></ul></article><article class="credential-card"><h3>其他</h3><ul><li>習慣使用 Git 進行版本控制與團隊協作。</li><li>具企業內部專案協作經驗，能與 PM、RD、Infra 團隊合作推進專案。</li></ul></article></div></div></section><section id="contact" class="contact"><div class="container"><h2>聯絡方式</h2><p class="contact-subtitle">歡迎透過以下方式聯絡我</p><div class="contact-methods"><a href="mailto:fantasybluz@gmail.com" class="contact-method"><span class="contact-method-label">Email</span><span class="contact-method-value">fantasybluz@gmail.com</span></a></div><div class="contact-links"><a href="https://www.instagram.com/fantasybluzz/" target="_blank" rel="me noopener noreferrer" class="contact-link"><span>instagram</span></a><a href="https://www.linkedin.com/in/yung-hung-lan-556575146/" target="_blank" rel="me noopener noreferrer" class="contact-link"><span>LinkedIn</span></a><a href="https://www.instagram.com/bluz_computer_studio/" target="_blank" rel="me noopener noreferrer" class="contact-link"><span>Bluz Computer Studio</span></a></div></div></section></main><footer class="footer"><div class="footer-divider"></div><p>© 2026 BLUZ TECH. All rights reserved.</p></footer></div></div>
   </body>
 </html>
