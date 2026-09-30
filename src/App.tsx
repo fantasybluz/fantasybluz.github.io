@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import { localePaths, seoByLocale, type Locale } from './locale.ts'
 
-const sectionIds = ['about', 'experience', 'skills', 'projects', 'credentials', 'contact'] as const
+const sectionIds = ['about', 'experience', 'skills', 'projects', 'side-projects', 'credentials', 'contact'] as const
 type SectionId = (typeof sectionIds)[number]
 
 interface SkillItem {
@@ -14,6 +14,11 @@ interface Project {
   title: string
   description: string
   technologies: string[]
+}
+
+interface SideProject extends Project {
+  tagline: string
+  highlights: string[]
 }
 
 interface ExperienceSegment {
@@ -50,6 +55,7 @@ interface PageContent {
     experience: string
     skills: string
     projects: string
+    sideProjects: string
     credentials: string
     contact: string
   }
@@ -71,6 +77,7 @@ interface PageContent {
   experienceTitle: string
   skillsTitle: string
   projectsTitle: string
+  sideProjectsTitle: string
   credentialsTitle: string
   contact: {
     title: string
@@ -80,6 +87,7 @@ interface PageContent {
   experiences: Experience[]
   skills: SkillItem[]
   projects: Project[]
+  sideProjects: SideProject[]
   credentials: CredentialGroup[]
   contactMethods: ContactMethod[]
   socials: SocialLink[]
@@ -92,6 +100,7 @@ const contentByLocale: Record<Locale, PageContent> = {
       experience: '經歷',
       skills: '技能',
       projects: '專案',
+      sideProjects: '個人專案',
       credentials: '履歷',
       contact: '聯絡'
     },
@@ -100,7 +109,7 @@ const contentByLocale: Record<Locale, PageContent> = {
     languageLabel: '切換語言',
     hero: {
       greeting: 'Hi, 我是',
-      name: '藍詠弘 Bluz',
+      name: 'Bluz',
       detailLine: '「簡單，往往比複雜更難做到。」— Steve Jobs'
     },
     about: {
@@ -122,6 +131,7 @@ const contentByLocale: Record<Locale, PageContent> = {
     experienceTitle: '工作經驗',
     skillsTitle: '技能總覽',
     projectsTitle: '代表性專案',
+    sideProjectsTitle: '個人專案',
     credentialsTitle: '履歷亮點',
     contact: {
       title: '聯絡方式',
@@ -257,6 +267,44 @@ const contentByLocale: Record<Locale, PageContent> = {
         technologies: ['Vue.js', 'Spring Boot', 'DB2', 'Xamarin', 'MOXA NPort']
       }
     ],
+    sideProjects: [
+      {
+        title: '零售管理系統',
+        tagline: '報價、訂單、庫存與營收一站式管理',
+        description: '串起報價、成交追蹤、出庫、出貨前檢測到營收統計的完整零售流程，部署在自架主機並實際上線營運。',
+        highlights: [
+          '報價單支援組新機、中古機、筆電與維修保養四種單別，可即時預覽並匯出 PDF / JPG。',
+          '庫存含進出庫與盤點紀錄、攤平成本與安全庫存示警；訂單進入組裝階段時自動扣庫存。',
+          '營收總覽依月 / 年統計營收與利潤，並分析客源與地區；客戶主檔依累計消費自動分級。',
+          '管理者 / 員工角色權限與 Passkey（Touch ID / Face ID）登入；推上 master 即由 self-hosted runner 自動部署。'
+        ],
+        technologies: ['Go', 'Gin', 'GORM', 'PostgreSQL', 'Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Podman', 'Kubernetes', 'Tailscale', 'GitHub Actions']
+      },
+      {
+        title: 'llm-bench',
+        tagline: '本機 LLM 速度與能力評測工具',
+        description: '用同一套方法比較同一個模型在 Ollama、llama.cpp、MLX 三種推論引擎上的表現，產生互動式網頁報表與 PDF，並保留每次結果以便跨次比較。',
+        highlights: [
+          '速度指標：首個 token 時間（TTFT）、輸出與讀入 prompt 速度、載入時間與記憶體峰值。',
+          '能力評測：MMLU（57 科）與 GSM8K，溫度 0、固定 seed，逐題保留回答以檢查誤判。',
+          '只用 Python 標準函式庫，題庫下載後以 sha256 驗證來源。',
+          'ECharts 報表含可篩選排序的總表、速度 vs 正確率散佈圖與歷次比較。'
+        ],
+        technologies: ['Python', 'Ollama', 'llama.cpp', 'MLX', 'ECharts', 'MMLU', 'GSM8K']
+      },
+      {
+        title: 'Atum',
+        tagline: '本機 AI 生圖網頁應用',
+        description: '在自己的電腦上用瀏覽器生圖，支援 FLUX.1-dev（NF4 量化）與 WAI Illustrious SDXL，圖片全程在本機產生，不會上傳任何資料。',
+        highlights: [
+          '前後端分離：FastAPI 後端、React + TypeScript 前端，支援生圖佇列、即時進度與預估剩餘時間。',
+          '自動偵測硬體：Apple Silicon（MPS）與 NVIDIA 顯卡（CUDA），支援 macOS、Windows、Linux。',
+          '一鍵安裝與線上更新（更新前自動備份、失敗自動還原），並提供 amd64 / arm64 容器映像檔。',
+          '提示詞組合器與可自訂詞庫，生成前進行內容安全檢查。'
+        ],
+        technologies: ['Python', 'FastAPI', 'React', 'TypeScript', 'PyTorch', 'diffusers', 'FLUX.1', 'SDXL', 'Docker']
+      }
+    ],
     credentials: [
       {
         title: '在職績效',
@@ -348,6 +396,7 @@ const contentByLocale: Record<Locale, PageContent> = {
       experience: 'Experience',
       skills: 'Skills',
       projects: 'Projects',
+      sideProjects: 'Side Projects',
       credentials: 'Resume',
       contact: 'Contact'
     },
@@ -378,6 +427,7 @@ const contentByLocale: Record<Locale, PageContent> = {
     experienceTitle: 'Work Experience',
     skillsTitle: 'Skills',
     projectsTitle: 'Projects',
+    sideProjectsTitle: 'Side Projects',
     credentialsTitle: 'Resume Highlights',
     contact: {
       title: 'Contact Me',
@@ -500,6 +550,44 @@ const contentByLocale: Record<Locale, PageContent> = {
         technologies: ['Vue.js', 'Spring Boot', 'DB2', 'Xamarin', 'MOXA NPort']
       }
     ],
+    sideProjects: [
+      {
+        title: 'Retail Management System',
+        tagline: 'Quotes, orders, inventory, and revenue in one place',
+        description: 'Covers the full retail flow from quoting and deal tracking to stock pulls, pre-delivery inspection, and revenue reporting. Self-hosted and used in live daily operations.',
+        highlights: [
+          'Quotes for new builds, used PCs, laptops, and repairs, with live preview and PDF / JPG export.',
+          'Inventory with stock movements, stock-take records, average cost, and low-stock alerts; stock is pulled automatically when an order enters assembly.',
+          'Revenue dashboard by month and year with profit, customer-source, and region breakdowns; customers are tiered by lifetime spend.',
+          'Admin / staff roles with Passkey (Touch ID / Face ID) sign-in; pushes to master deploy automatically through a self-hosted runner.'
+        ],
+        technologies: ['Go', 'Gin', 'GORM', 'PostgreSQL', 'Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Podman', 'Kubernetes', 'Tailscale', 'GitHub Actions']
+      },
+      {
+        title: 'llm-bench',
+        tagline: 'Local LLM speed and capability benchmark',
+        description: 'Benchmarks the same model across three inference engines (Ollama, llama.cpp, and MLX) with one consistent method, producing an interactive HTML report and a PDF while keeping every run for comparison.',
+        highlights: [
+          'Speed: time to first token (TTFT), output and prompt-processing throughput, load time, and peak memory.',
+          'Capability: MMLU (57 subjects) and GSM8K at temperature 0 with a fixed seed, keeping every answer for review.',
+          'Built on the Python standard library only; datasets are verified by sha256 after download.',
+          'ECharts report with a sortable, filterable summary table, speed-vs-accuracy scatter plot, and run history.'
+        ],
+        technologies: ['Python', 'Ollama', 'llama.cpp', 'MLX', 'ECharts', 'MMLU', 'GSM8K']
+      },
+      {
+        title: 'Atum',
+        tagline: 'Local AI image generation web app',
+        description: 'Generates images on your own machine from the browser with FLUX.1-dev (NF4 quantized) and WAI Illustrious SDXL; images never leave the device.',
+        highlights: [
+          'FastAPI backend and React + TypeScript frontend with a job queue, live progress, and time-remaining estimates.',
+          'Detects hardware automatically: Apple Silicon (MPS) and NVIDIA GPUs (CUDA) on macOS, Windows, and Linux.',
+          'One-click install and in-app updates with automatic backup and rollback, plus amd64 / arm64 container images.',
+          'Prompt builder with an editable tag library and content-safety checks before generation.'
+        ],
+        technologies: ['Python', 'FastAPI', 'React', 'TypeScript', 'PyTorch', 'diffusers', 'FLUX.1', 'SDXL', 'Docker']
+      }
+    ],
     credentials: [
       {
         title: 'Performance',
@@ -584,6 +672,7 @@ function App({ locale }: AppProps) {
     { id: 'experience', label: content.nav.experience },
     { id: 'skills', label: content.nav.skills },
     { id: 'projects', label: content.nav.projects },
+    { id: 'side-projects', label: content.nav.sideProjects },
     { id: 'credentials', label: content.nav.credentials },
     { id: 'contact', label: content.nav.contact }
   ]
@@ -877,6 +966,35 @@ function App({ locale }: AppProps) {
                     ))}
                   </div>
                 </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Side Projects Section */}
+        <section id="side-projects" className="side-projects">
+          <div className="container">
+            <h2>{content.sideProjectsTitle}</h2>
+            <div className="projects-grid">
+              {content.sideProjects.map((project) => (
+                <article key={project.title} className="project-card">
+                  <div className="project-header">
+                    <h3>{project.title}</h3>
+                    <div className="project-accent"></div>
+                  </div>
+                  <p className="project-tagline">{project.tagline}</p>
+                  <p className="project-description">{project.description}</p>
+                  <ul className="project-highlights">
+                    {project.highlights.map((highlight) => (
+                      <li key={highlight} className="project-highlight">{highlight}</li>
+                    ))}
+                  </ul>
+                  <div className="technologies">
+                    {project.technologies.map((tech) => (
+                      <span key={tech} className="tech-tag">{tech}</span>
+                    ))}
+                  </div>
+                </article>
               ))}
             </div>
           </div>
