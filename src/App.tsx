@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react'
 import './App.css'
+import { localePaths, seoByLocale, type Locale } from './locale.ts'
 
-type Locale = 'zh' | 'en'
 const sectionIds = ['about', 'experience', 'skills', 'projects', 'credentials', 'contact'] as const
 type SectionId = (typeof sectionIds)[number]
-
-const LOCALE_STORAGE_KEY = 'bluz-tech-locale'
 
 interface SkillItem {
   category: string
@@ -46,12 +44,6 @@ interface CredentialGroup {
   items: string[]
 }
 
-interface SeoContent {
-  title: string
-  description: string
-  ogLocale: string
-}
-
 interface PageContent {
   nav: {
     about: string
@@ -64,7 +56,6 @@ interface PageContent {
   mobileMenuOpenLabel: string
   mobileMenuCloseLabel: string
   languageLabel: string
-  seo: SeoContent
   hero: {
     greeting: string
     name: string
@@ -94,20 +85,6 @@ interface PageContent {
   socials: SocialLink[]
 }
 
-function getInitialLocale(): Locale {
-  if (typeof window === 'undefined') {
-    return 'zh'
-  }
-
-  const savedLocale = window.localStorage.getItem(LOCALE_STORAGE_KEY)
-  if (savedLocale === 'zh' || savedLocale === 'en') {
-    return savedLocale
-  }
-
-  const browserLocale = window.navigator.language.toLowerCase()
-  return browserLocale.startsWith('zh') ? 'zh' : 'en'
-}
-
 const contentByLocale: Record<Locale, PageContent> = {
   zh: {
     nav: {
@@ -121,15 +98,9 @@ const contentByLocale: Record<Locale, PageContent> = {
     mobileMenuOpenLabel: '開啟選單',
     mobileMenuCloseLabel: '關閉選單',
     languageLabel: '切換語言',
-    seo: {
-      title: '藍詠弘 Bluz Lan | 軟體工程師作品集',
-      description:
-        '藍詠弘（Bluz Lan）個人履歷網站，聚焦後端、前端、雲端、DevOps 與 ML，具 OpenStack、Kubernetes、GPU 平台整合實務經驗。',
-      ogLocale: 'zh_TW'
-    },
     hero: {
       greeting: 'Hi, 我是',
-      name: 'Bluz',
+      name: '藍詠弘 Bluz',
       detailLine: '「簡單，往往比複雜更難做到。」— Steve Jobs'
     },
     about: {
@@ -383,15 +354,9 @@ const contentByLocale: Record<Locale, PageContent> = {
     mobileMenuOpenLabel: 'Open menu',
     mobileMenuCloseLabel: 'Close menu',
     languageLabel: 'Switch language',
-    seo: {
-      title: 'Bluz Lan | Software Engineer Portfolio',
-      description:
-        'Software Engineer portfolio of Bluz Lan, focused on backend, frontend, cloud, DevOps, and ML with hands-on OpenStack, Kubernetes, and GPU platform integration.',
-      ogLocale: 'en_US'
-    },
     hero: {
       greeting: 'Hi, I am',
-      name: 'Bluz',
+      name: 'Bluz Lan',
       detailLine: '"Simple can be harder than complex." — Steve Jobs'
     },
     about: {
@@ -605,8 +570,11 @@ function setMetaContent(attribute: 'name' | 'property', key: string, value: stri
   element.setAttribute('content', value)
 }
 
-function App() {
-  const [locale, setLocale] = useState<Locale>(getInitialLocale)
+interface AppProps {
+  locale: Locale
+}
+
+function App({ locale }: AppProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [activeSection, setActiveSection] = useState<SectionId>('about')
@@ -621,10 +589,9 @@ function App() {
   ]
 
   useEffect(() => {
-    const seo = contentByLocale[locale].seo
+    const seo = seoByLocale[locale]
 
-    window.localStorage.setItem(LOCALE_STORAGE_KEY, locale)
-    document.documentElement.lang = locale === 'zh' ? 'zh-Hant' : 'en'
+    document.documentElement.lang = seo.htmlLang
     document.title = seo.title
 
     setMetaContent('name', 'description', seo.description)
@@ -775,29 +742,25 @@ function App() {
             </div>
 
             <div className="language-switcher" role="group" aria-label={content.languageLabel}>
-              <button
-                type="button"
+              <a
+                href={localePaths.zh}
+                hrefLang="zh-Hant"
+                lang="zh-Hant"
                 className={`lang-btn ${locale === 'zh' ? 'active' : ''}`}
-                onClick={() => {
-                  setLocale('zh')
-                  setIsMenuOpen(false)
-                }}
-                aria-pressed={locale === 'zh'}
+                aria-current={locale === 'zh' ? 'true' : undefined}
               >
                 中
-              </button>
+              </a>
               <span className="lang-divider">/</span>
-              <button
-                type="button"
+              <a
+                href={localePaths.en}
+                hrefLang="en"
+                lang="en"
                 className={`lang-btn ${locale === 'en' ? 'active' : ''}`}
-                onClick={() => {
-                  setLocale('en')
-                  setIsMenuOpen(false)
-                }}
-                aria-pressed={locale === 'en'}
+                aria-current={locale === 'en' ? 'true' : undefined}
               >
                 EN
-              </button>
+              </a>
             </div>
           </div>
         </nav>

@@ -5,7 +5,8 @@ Production website: <https://fantasybluz.github.io/>
 ## 1. Overview
 
 This repository contains a static portfolio/resume website implemented with React + TypeScript + Vite.
-The site supports bilingual content (zh/en), responsive layouts, and SEO-oriented metadata for search and social sharing.
+The site supports bilingual content (zh at `/`, en at `/en/`), responsive layouts, and SEO-oriented metadata for search and social sharing.
+Each locale is prerendered to static HTML at build time, so crawlers receive full content without running JavaScript.
 
 ## 2. Tech Stack
 
@@ -18,8 +19,10 @@ The site supports bilingual content (zh/en), responsive layouts, and SEO-oriente
 
 ## 3. System Architecture
 
-- Entry point: `src/main.tsx`
+- Entry point: `src/main.tsx` (picks the locale from the URL path, hydrates prerendered HTML)
 - Application container and content model: `src/App.tsx`
+- Locale routing and SEO strings: `src/locale.ts`
+- Build-time rendering: `src/entry-server.tsx` + `scripts/prerender.mjs`
 - Component styling: `src/App.css`
 - Global styling: `src/index.css`
 - Static assets: `public/`
@@ -31,7 +34,16 @@ The primary content source is `contentByLocale` in `src/App.tsx`:
 
 - `zh` and `en` locale objects
 - Shared section schema (`hero`, `about`, `experience`, `skills`, `projects`, `credentials`, `contact`)
-- Locale-specific SEO content (`title`, `description`, `ogLocale`)
+
+Locale-specific SEO content (`title`, `description`, `ogLocale`, `imageAlt`) lives in `seoByLocale` in `src/locale.ts`.
+
+### 3.2 Locale Routing and Prerendering
+
+- The URL decides the language: `/` renders `zh`, `/en/` renders `en`. There is no browser-language redirect, so crawlers can reach both versions.
+- The language switcher is a pair of links to those URLs.
+- `npm run build` runs three steps: the client build, an SSR build of `src/entry-server.tsx` into `dist-ssr/`, then `scripts/prerender.mjs`.
+- `scripts/prerender.mjs` writes `dist/index.html` and `dist/en/index.html`, rewriting each page's `lang`, title, description, canonical, Open Graph, and Twitter tags from `seoByLocale`. It fails the build if an expected tag is missing from `index.html`.
+- It also stamps every `<lastmod>` in `dist/sitemap.xml` with the build date, then removes `dist-ssr/`.
 
 ## 4. Prerequisites
 
@@ -62,7 +74,7 @@ Default local URL: <http://localhost:5173>
 npm run build
 ```
 
-Output directory: `dist/`
+Output directory: `dist/` (`index.html` for zh, `en/index.html` for en)
 
 ### 6.2 Lint (TS/JS)
 
@@ -89,9 +101,11 @@ SEO resources are managed in:
 - `index.html`
   - `meta` description/robots/canonical
   - Open Graph and Twitter cards
-  - JSON-LD (`Person`)
+  - `hreflang` alternates for `zh-Hant`, `en`, and `x-default`
+  - JSON-LD graph (`WebSite`, `ProfilePage`, `Person`)
+  - Per-locale values are overwritten at build time from `src/locale.ts`
 - `public/robots.txt`
-- `public/sitemap.xml`
+- `public/sitemap.xml` (both locale URLs with `hreflang` alternates)
 - `public/google12b722e4207bfe96.html` (Google Search Console HTML verification)
 
 Post-deploy verification URL:
@@ -114,6 +128,8 @@ Deployment is automated by GitHub Actions:
 .
 ├── .github/workflows/deploy.yml
 ├── index.html
+├── scripts/
+│   └── prerender.mjs
 ├── public/
 │   ├── Bluz_Lan.jpg
 │   ├── logo.png
@@ -123,7 +139,9 @@ Deployment is automated by GitHub Actions:
 ├── src/
 │   ├── App.tsx
 │   ├── App.css
+│   ├── entry-server.tsx
 │   ├── index.css
+│   ├── locale.ts
 │   └── main.tsx
 └── package.json
 ```
@@ -133,7 +151,8 @@ Deployment is automated by GitHub Actions:
 - Update resume content: edit `contentByLocale` in `src/App.tsx`
 - Update profile image: replace `public/Bluz_Lan.jpg`
 - Update favicon/logo: replace `public/logo.png`
-- Update SEO metadata: edit `index.html`, `public/robots.txt`, `public/sitemap.xml`
+- Update per-locale title/description: edit `seoByLocale` in `src/locale.ts`
+- Update shared SEO metadata (JSON-LD, image, hreflang): edit `index.html`, `public/robots.txt`, `public/sitemap.xml`
 
 ## 11. License
 

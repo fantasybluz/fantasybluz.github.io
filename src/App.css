@@ -280,6 +280,7 @@
 }
 
 .lang-btn {
+  display: inline-block;
   border: 1px solid transparent;
   background: transparent;
   color: #475569;
@@ -289,6 +290,8 @@
   font-weight: 600;
   letter-spacing: 0.04em;
   line-height: 1;
+  text-align: center;
+  text-decoration: none;
   text-transform: none;
   border-radius: 2px;
 }
