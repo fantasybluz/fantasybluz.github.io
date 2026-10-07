@@ -16,9 +16,23 @@ interface Project {
   technologies: string[]
 }
 
+interface ProjectLink {
+  label: string
+  url: string
+}
+
+interface Screenshot {
+  src: string
+  alt: string
+}
+
 interface SideProject extends Project {
+  // Screenshots live in public/screenshots/<slug>/
+  slug: string
   tagline: string
   highlights: string[]
+  screenshots: Screenshot[]
+  links?: ProjectLink[]
 }
 
 interface ExperienceSegment {
@@ -218,15 +232,15 @@ const contentByLocale: Record<Locale, PageContent> = {
       },
       {
         category: '後端開發',
-        items: ['Node.js（TypeScript）', 'Express.js（Node.js Framework）', 'Golang + Gin API 開發', 'Gophercloud（OpenStack SDK）整合', 'RESTful API 設計與實作', 'Java Spring Web MVC / Spring Boot', 'Django / Flask 基本 Web 服務']
+        items: ['Node.js（TypeScript）', 'Express.js（Node.js Framework）', 'Golang + Gin API 開發', 'Gophercloud（OpenStack SDK）整合', 'RESTful API 設計與實作', 'WebSocket 即時連線', 'BullMQ 非同步任務佇列', 'FastAPI', 'Java Spring Web MVC / Spring Boot', 'Django / Flask 基本 Web 服務']
       },
       {
         category: '前端開發',
-        items: ['React（TypeScript）', 'Vue.js', 'Xamarin（.NET Framework）', '企業內部系統 UI / 表單 / 權限頁面開發']
+        items: ['React（TypeScript）', 'Next.js', 'Turborepo + pnpm Monorepo', 'Tailwind CSS', 'Vue.js', 'Xamarin（.NET Framework）', '企業內部系統 UI / 表單 / 權限頁面開發']
       },
       {
         category: '雲端、容器與 DevOps',
-        items: ['Docker', 'Kubernetes', 'OpenStack', 'Azure DevOps Pipeline', 'GitLab CI/CD', 'GPU Node 納管與資源管理']
+        items: ['Docker / Podman', 'Kubernetes', 'Kubernetes Operator（Kubebuilder）', 'Helm + GitOps 部署', 'OpenStack', 'GitHub Actions', 'Azure DevOps Pipeline', 'GitLab CI/CD', 'Multi-arch 容器映像建置', 'GPU Node 納管與資源管理', 'Tailscale']
       },
       {
         category: '資料庫',
@@ -235,6 +249,10 @@ const contentByLocale: Record<Locale, PageContent> = {
       {
         category: '開發流程與協作',
         items: ['Scrum 敏捷開發', 'Sprint 規劃 / Daily / Review / Retro', 'Git 版本控制', 'Code Review', '跨團隊協作（PM / Infra / QA / RD）']
+      },
+      {
+        category: 'AI / LLM 應用',
+        items: ['Ollama / llama.cpp / MLX 本機推論', 'RAG 檢索增強生成', 'Embedding 語意搜尋（pgvector）', 'MCP（Model Context Protocol）Server', 'diffusers（FLUX.1 / SDXL）', 'LLM 評測（MMLU / GSM8K）']
       },
       {
         category: '機器學習與資料處理',
@@ -270,6 +288,7 @@ const contentByLocale: Record<Locale, PageContent> = {
     sideProjects: [
       {
         title: '零售管理系統',
+        slug: 'retail-system',
         tagline: '報價、訂單、庫存與營收一站式管理',
         description: '串起報價、成交追蹤、出庫、出貨前檢測到營收統計的完整零售流程，部署在自架主機並實際上線營運。',
         highlights: [
@@ -278,10 +297,41 @@ const contentByLocale: Record<Locale, PageContent> = {
           '營收總覽依月 / 年統計營收與利潤，並分析客源與地區；客戶主檔依累計消費自動分級。',
           '管理者 / 員工角色權限與 Passkey（Touch ID / Face ID）登入；推上 master 即由 self-hosted runner 自動部署。'
         ],
-        technologies: ['Go', 'Gin', 'GORM', 'PostgreSQL', 'Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Podman', 'Kubernetes', 'Tailscale', 'GitHub Actions']
+        technologies: ['Go', 'Gin', 'GORM', 'PostgreSQL', 'Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Podman', 'Kubernetes', 'Tailscale', 'GitHub Actions'],
+        screenshots: []
+      },
+      {
+        title: 'mneme',
+        slug: 'mneme',
+        tagline: '結合本機 LLM 與 AI Agent 的個人知識庫',
+        description: '像 Notion 的筆記、資料庫、待辦與日記系統，部署在自架主機、只有自己的 Tailscale 裝置連得到；語意搜尋與問答都由本機模型處理，筆記內容不會送到外面。',
+        highlights: [
+          '語意搜尋：以 Ollama bge-m3 產生向量、存進 PostgreSQL pgvector，用詞不同也找得到；中文關鍵字搜尋使用 pg_trgm。',
+          '問 mneme（RAG）：用一句話問自己的筆記，挑出最相關的段落交給本機 LLM 回答，並以 [1]、[2] 標出引用來源。',
+          'MCP Server：讓 Claude Code 搜尋、讀取筆記並寫入工作日誌與開發紀錄；只開放指定分類，只能查詢與新增。',
+          '區塊編輯器、巢狀頁面、資料庫（表格 / 看板 / 行事曆）與版本紀錄，並與 Google 行事曆雙向同步。'
+        ],
+        technologies: ['Go', 'Gin', 'PostgreSQL', 'pgvector', 'Ollama', 'RAG', 'MCP', 'React', 'TypeScript', 'Tailwind CSS', 'Podman', 'Tailscale'],
+        screenshots: []
+      },
+      {
+        title: 'llm-operator',
+        slug: 'llm-operator',
+        tagline: '在 Kubernetes 上部署本機 LLM 的 Operator',
+        description: '用一個 LLMService 自訂資源描述要跑的模型，Operator 就會下載模型、啟動推論伺服器，並在叢集內提供 OpenAI 相容的 API。',
+        highlights: [
+          '支援 Ollama 與 llama.cpp 兩種推論引擎，對外都是同一個 Service 埠與 OpenAI 相容的 /v1 路徑。',
+          '以 StatefulSet 為每個副本配置獨立的模型快取 PV，模型只下載一次、重啟後保留；換模型時自動滾動更新。',
+          'GPU 排程：設定 gpus 即申請 nvidia.com/gpu，llama.cpp 會自動切換 CUDA 映像並將所有層卸載到 GPU。',
+          'Status 的 Phase 與 Conditions 說明未就緒原因（模型下載失敗、映像拉不到、沒有可用 GPU）；支援 scale 子資源與 HPA，並以 CEL 在 API 層驗證 spec。'
+        ],
+        technologies: ['Go', 'Kubebuilder', 'controller-runtime', 'Kubernetes', 'CRD', 'Ollama', 'llama.cpp', 'GPU', 'envtest', 'kind'],
+        screenshots: [],
+        links: [{ label: 'GitHub', url: 'https://github.com/fantasybluz/llm-operator' }]
       },
       {
         title: 'llm-bench',
+        slug: 'llm-bench',
         tagline: '本機 LLM 速度與能力評測工具',
         description: '用同一套方法比較同一個模型在 Ollama、llama.cpp、MLX 三種推論引擎上的表現，產生互動式網頁報表與 PDF，並保留每次結果以便跨次比較。',
         highlights: [
@@ -290,10 +340,12 @@ const contentByLocale: Record<Locale, PageContent> = {
           '只用 Python 標準函式庫，題庫下載後以 sha256 驗證來源。',
           'ECharts 報表含可篩選排序的總表、速度 vs 正確率散佈圖與歷次比較。'
         ],
-        technologies: ['Python', 'Ollama', 'llama.cpp', 'MLX', 'ECharts', 'MMLU', 'GSM8K']
+        technologies: ['Python', 'Ollama', 'llama.cpp', 'MLX', 'ECharts', 'MMLU', 'GSM8K'],
+        screenshots: []
       },
       {
         title: 'Atum',
+        slug: 'atum',
         tagline: '本機 AI 生圖網頁應用',
         description: '在自己的電腦上用瀏覽器生圖，支援 FLUX.1-dev（NF4 量化）與 WAI Illustrious SDXL，圖片全程在本機產生，不會上傳任何資料。',
         highlights: [
@@ -302,7 +354,8 @@ const contentByLocale: Record<Locale, PageContent> = {
           '一鍵安裝與線上更新（更新前自動備份、失敗自動還原），並提供 amd64 / arm64 容器映像檔。',
           '提示詞組合器與可自訂詞庫，生成前進行內容安全檢查。'
         ],
-        technologies: ['Python', 'FastAPI', 'React', 'TypeScript', 'PyTorch', 'diffusers', 'FLUX.1', 'SDXL', 'Docker']
+        technologies: ['Python', 'FastAPI', 'React', 'TypeScript', 'PyTorch', 'diffusers', 'FLUX.1', 'SDXL', 'Docker'],
+        screenshots: []
       }
     ],
     credentials: [
@@ -509,19 +562,23 @@ const contentByLocale: Record<Locale, PageContent> = {
       },
       {
         category: 'Backend Development',
-        items: ['Node.js (TypeScript)', 'Express.js', 'Golang + Gin API development', 'Gophercloud (OpenStack SDK) integration', 'RESTful APIs', 'Java Spring MVC / Spring Boot', 'Django / Flask']
+        items: ['Node.js (TypeScript)', 'Express.js', 'Golang + Gin API development', 'Gophercloud (OpenStack SDK) integration', 'RESTful APIs', 'WebSocket', 'BullMQ job queues', 'FastAPI', 'Java Spring MVC / Spring Boot', 'Django / Flask']
       },
       {
         category: 'Frontend Development',
-        items: ['React (TypeScript)', 'Vue.js', 'Xamarin (.NET Framework)', 'Enterprise UI development']
+        items: ['React (TypeScript)', 'Next.js', 'Turborepo + pnpm monorepos', 'Tailwind CSS', 'Vue.js', 'Xamarin (.NET Framework)', 'Enterprise UI development']
       },
       {
         category: 'Cloud, Container, and DevOps',
-        items: ['Docker', 'Kubernetes', 'OpenStack', 'Azure DevOps Pipeline', 'GitLab CI/CD', 'GPU Node Management']
+        items: ['Docker / Podman', 'Kubernetes', 'Kubernetes Operators (Kubebuilder)', 'Helm + GitOps deployment', 'OpenStack', 'GitHub Actions', 'Azure DevOps Pipeline', 'GitLab CI/CD', 'Multi-arch container builds', 'GPU Node Management', 'Tailscale']
       },
       {
         category: 'Database',
         items: ['PostgreSQL', 'MySQL', 'MariaDB', 'MS-SQL', 'DB2', 'Schema and Index Optimization']
+      },
+      {
+        category: 'AI / LLM Applications',
+        items: ['Local inference with Ollama / llama.cpp / MLX', 'Retrieval-augmented generation (RAG)', 'Embedding-based semantic search (pgvector)', 'MCP (Model Context Protocol) servers', 'diffusers (FLUX.1 / SDXL)', 'LLM evaluation (MMLU / GSM8K)']
       },
       {
         category: 'ML and Data',
@@ -553,6 +610,7 @@ const contentByLocale: Record<Locale, PageContent> = {
     sideProjects: [
       {
         title: 'Retail Management System',
+        slug: 'retail-system',
         tagline: 'Quotes, orders, inventory, and revenue in one place',
         description: 'Covers the full retail flow from quoting and deal tracking to stock pulls, pre-delivery inspection, and revenue reporting. Self-hosted and used in live daily operations.',
         highlights: [
@@ -561,10 +619,41 @@ const contentByLocale: Record<Locale, PageContent> = {
           'Revenue dashboard by month and year with profit, customer-source, and region breakdowns; customers are tiered by lifetime spend.',
           'Admin / staff roles with Passkey (Touch ID / Face ID) sign-in; pushes to master deploy automatically through a self-hosted runner.'
         ],
-        technologies: ['Go', 'Gin', 'GORM', 'PostgreSQL', 'Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Podman', 'Kubernetes', 'Tailscale', 'GitHub Actions']
+        technologies: ['Go', 'Gin', 'GORM', 'PostgreSQL', 'Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Podman', 'Kubernetes', 'Tailscale', 'GitHub Actions'],
+        screenshots: []
+      },
+      {
+        title: 'mneme',
+        slug: 'mneme',
+        tagline: 'Personal knowledge base with local LLMs and AI agent access',
+        description: 'A Notion-style app for notes, databases, to-dos, and a journal, self-hosted and reachable only from my own Tailscale devices. Semantic search and Q&A run on local models, so notes never leave the machine.',
+        highlights: [
+          'Semantic search: Ollama bge-m3 embeddings stored in PostgreSQL pgvector find notes even when the wording differs; pg_trgm handles Chinese keyword search.',
+          'Ask mneme (RAG): ask a question in plain language; the most relevant passages go to a local LLM, which answers with [1], [2] citations back to the notes.',
+          'MCP server: lets Claude Code search and read notes and append to work logs and dev logs, limited to chosen categories and to read and append only.',
+          'Block editor, nested pages, databases (table / board / calendar), version history, and two-way sync with Google Calendar.'
+        ],
+        technologies: ['Go', 'Gin', 'PostgreSQL', 'pgvector', 'Ollama', 'RAG', 'MCP', 'React', 'TypeScript', 'Tailwind CSS', 'Podman', 'Tailscale'],
+        screenshots: []
+      },
+      {
+        title: 'llm-operator',
+        slug: 'llm-operator',
+        tagline: 'Kubernetes operator for serving local LLMs',
+        description: 'Describe a model in one LLMService custom resource; the operator fetches the model, runs the inference server, and exposes an OpenAI-compatible API inside the cluster.',
+        highlights: [
+          'Two engines, Ollama and llama.cpp, behind the same Service port and OpenAI-compatible /v1 path.',
+          'A StatefulSet gives each replica its own model cache volume, so models download once and survive restarts; changing the model rolls the pods.',
+          'GPU scheduling: setting gpus requests nvidia.com/gpu, and llama.cpp switches to the CUDA image and offloads every layer to the GPU.',
+          'Status phases and conditions explain why a service is not ready (model download, image pull, or no free GPU); supports the scale subresource and HPA, with CEL validation at the API.'
+        ],
+        technologies: ['Go', 'Kubebuilder', 'controller-runtime', 'Kubernetes', 'CRD', 'Ollama', 'llama.cpp', 'GPU', 'envtest', 'kind'],
+        screenshots: [],
+        links: [{ label: 'GitHub', url: 'https://github.com/fantasybluz/llm-operator' }]
       },
       {
         title: 'llm-bench',
+        slug: 'llm-bench',
         tagline: 'Local LLM speed and capability benchmark',
         description: 'Benchmarks the same model across three inference engines (Ollama, llama.cpp, and MLX) with one consistent method, producing an interactive HTML report and a PDF while keeping every run for comparison.',
         highlights: [
@@ -573,10 +662,12 @@ const contentByLocale: Record<Locale, PageContent> = {
           'Built on the Python standard library only; datasets are verified by sha256 after download.',
           'ECharts report with a sortable, filterable summary table, speed-vs-accuracy scatter plot, and run history.'
         ],
-        technologies: ['Python', 'Ollama', 'llama.cpp', 'MLX', 'ECharts', 'MMLU', 'GSM8K']
+        technologies: ['Python', 'Ollama', 'llama.cpp', 'MLX', 'ECharts', 'MMLU', 'GSM8K'],
+        screenshots: []
       },
       {
         title: 'Atum',
+        slug: 'atum',
         tagline: 'Local AI image generation web app',
         description: 'Generates images on your own machine from the browser with FLUX.1-dev (NF4 quantized) and WAI Illustrious SDXL; images never leave the device.',
         highlights: [
@@ -585,7 +676,8 @@ const contentByLocale: Record<Locale, PageContent> = {
           'One-click install and in-app updates with automatic backup and rollback, plus amd64 / arm64 container images.',
           'Prompt builder with an editable tag library and content-safety checks before generation.'
         ],
-        technologies: ['Python', 'FastAPI', 'React', 'TypeScript', 'PyTorch', 'diffusers', 'FLUX.1', 'SDXL', 'Docker']
+        technologies: ['Python', 'FastAPI', 'React', 'TypeScript', 'PyTorch', 'diffusers', 'FLUX.1', 'SDXL', 'Docker'],
+        screenshots: []
       }
     ],
     credentials: [
@@ -983,6 +1075,18 @@ function App({ locale }: AppProps) {
                     <div className="project-accent"></div>
                   </div>
                   <p className="project-tagline">{project.tagline}</p>
+                  {project.screenshots.length > 0 ? (
+                    <div className="project-screenshots">
+                      {project.screenshots.map((screenshot) => (
+                        <a key={screenshot.src} href={screenshot.src} target="_blank" rel="noopener noreferrer" className="project-screenshot">
+                          <img src={screenshot.src} alt={screenshot.alt} loading="lazy" decoding="async" />
+                        </a>
+                      ))}
+                    </div>
+                  ) : import.meta.env.DEV ? (
+                    // Dev-only reminder of where this project's screenshots go; hidden in the production build.
+                    <div className="project-screenshot-placeholder">public/screenshots/{project.slug}/</div>
+                  ) : null}
                   <p className="project-description">{project.description}</p>
                   <ul className="project-highlights">
                     {project.highlights.map((highlight) => (
@@ -994,6 +1098,15 @@ function App({ locale }: AppProps) {
                       <span key={tech} className="tech-tag">{tech}</span>
                     ))}
                   </div>
+                  {project.links ? (
+                    <div className="project-links">
+                      {project.links.map((link) => (
+                        <a key={link.url} href={link.url} target="_blank" rel="noopener noreferrer" className="project-link">
+                          {link.label} <span aria-hidden="true">↗</span>
+                        </a>
+                      ))}
+                    </div>
+                  ) : null}
                 </article>
               ))}
             </div>

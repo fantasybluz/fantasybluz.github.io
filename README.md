@@ -134,6 +134,7 @@ Deployment is automated by GitHub Actions:
 │   ├── Bluz_Lan.jpg
 │   ├── logo.png
 │   ├── robots.txt
+│   ├── screenshots/        # one folder per side project (slug)
 │   ├── sitemap.xml
 │   └── google12b722e4207bfe96.html
 ├── src/
@@ -149,6 +150,8 @@ Deployment is automated by GitHub Actions:
 ## 10. Common Update Scenarios
 
 - Update resume content: edit `contentByLocale` in `src/App.tsx`
+- Add side-project screenshots: put images in `public/screenshots/<slug>/`, then list them in that project's `screenshots` (e.g. `{ src: '/screenshots/mneme/home.png', alt: '...' }`) in both `zh` and `en`. Images are shown at 16:10, cropped from the top; extra screenshots scroll sideways. While the list is empty, `npm run dev` shows a dashed placeholder with the folder path, and the production build shows nothing.
+- Add side-project links (repo, demo): add `links` to that project, e.g. `[{ label: 'GitHub', url: '...' }]`
 - Update profile image: replace `public/Bluz_Lan.jpg`
 - Update favicon/logo: replace `public/logo.png`
 - Update per-locale title/description: edit `seoByLocale` in `src/locale.ts`

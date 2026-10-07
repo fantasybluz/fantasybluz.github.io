@@ -991,6 +991,66 @@ section h2::after {
   box-shadow: 0 0 5px rgb(56 189 248 / 80%);
 }
 
+/* One screenshot per view; extra screenshots scroll sideways */
+.project-screenshots {
+  display: flex;
+  gap: 0.75rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  margin: 0 0 1.25rem;
+}
+
+.project-screenshot,
+.project-screenshot-placeholder {
+  aspect-ratio: 16 / 10;
+  border: 1px solid rgb(56 189 248 / 14%);
+  border-radius: 4px;
+  background: rgb(56 189 248 / 3.5%);
+}
+
+.project-screenshot {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  overflow: hidden;
+}
+
+.project-screenshot img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+.project-screenshot-placeholder {
+  display: grid;
+  place-items: center;
+  margin: 0 0 1.25rem;
+  border-style: dashed;
+  color: #64748b;
+  font-size: 0.75rem;
+  font-family: SFMono-Regular, Consolas, Monaco, monospace;
+}
+
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.1rem;
+}
+
+.project-link {
+  color: #38bdf8;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  border-bottom: 1px solid rgb(56 189 248 / 30%);
+}
+
+.project-link:hover {
+  border-bottom-color: #38bdf8;
+}
+
 /* ===== Credentials Section ===== */
 .credentials {
   background: transparent;
