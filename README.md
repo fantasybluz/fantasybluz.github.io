@@ -1,6 +1,7 @@
 # Bluz Lan Portfolio
 
-Production website: <https://fantasybluz.github.io/>
+Production website: <https://marklan.pages.dev/> (hosted on Cloudflare Pages).
+The old address <https://fantasybluz.github.io/> forwards every path to the new site.
 
 ## 1. Overview
 
@@ -15,7 +16,8 @@ Each locale is prerendered to static HTML at build time, so crawlers receive ful
 - Build tool: Vite 7
 - Linting: ESLint 9
 - CSS linting: Stylelint 17
-- CI/CD: GitHub Actions (deploy to GitHub Pages)
+- Hosting: Cloudflare Pages (the old GitHub Pages address redirects)
+- CI/CD: GitHub Actions
 
 ## 3. System Architecture
 
@@ -106,21 +108,32 @@ SEO resources are managed in:
   - Per-locale values are overwritten at build time from `src/locale.ts`
 - `public/robots.txt`
 - `public/sitemap.xml` (both locale URLs with `hreflang` alternates)
-- `public/google12b722e4207bfe96.html` (Google Search Console HTML verification)
+- `public/google12b722e4207bfe96.html` (Google Search Console HTML verification for the old `fantasybluz.github.io` property)
+- `public/_headers` (Cloudflare Pages response headers: security headers, long cache for hashed `assets/`)
 
-Post-deploy verification URL:
+All absolute URLs (canonical, `hreflang`, Open Graph, JSON-LD, sitemap, robots) use `https://marklan.pages.dev`;
+`SITE_URL` in `scripts/prerender.mjs` must match.
 
-`https://fantasybluz.github.io/google12b722e4207bfe96.html`
+To track the new address in Google Search Console, add `https://marklan.pages.dev/` as a URL-prefix property
+and verify it with a new HTML file in `public/`.
 
 ## 8. Deployment Pipeline
 
-Deployment is automated by GitHub Actions:
+The site is hosted on Cloudflare Pages (project `marklan`, <https://marklan.pages.dev>).
 
-- Workflow file: `.github/workflows/deploy.yml`
-- Trigger: push to `main`
-- Build command: `npm run build`
-- Published artifact directory: `dist/`
-- Published branch: `gh-pages`
+Deploy from a laptop (needs `wrangler login` with the Cloudflare account):
+
+```bash
+npm run deploy   # npm run build + wrangler pages deploy dist --project-name marklan --branch main
+```
+
+GitHub Actions (`.github/workflows/deploy.yml`, on push to `main`) runs two jobs:
+
+- `cloudflare-pages`: builds and deploys to Cloudflare Pages. Skipped until the repository secrets
+  `CLOUDFLARE_API_TOKEN` (Cloudflare Pages: Edit permission) and `CLOUDFLARE_ACCOUNT_ID` are set.
+- `github-pages-redirect`: runs `scripts/build-redirect.mjs` and publishes `redirect-dist/` to the `gh-pages` branch,
+  so <https://fantasybluz.github.io/> forwards every path (including query and hash) to the same path on the new site.
+  The Google verification files are kept there so the old Search Console property stays verified.
 
 ## 9. Repository Structure
 
@@ -129,13 +142,15 @@ Deployment is automated by GitHub Actions:
 ├── .github/workflows/deploy.yml
 ├── index.html
 ├── scripts/
-│   └── prerender.mjs
+│   ├── prerender.mjs
+│   └── build-redirect.mjs  # old GitHub Pages address -> new site
 ├── public/
 │   ├── Bluz_Lan.jpg
 │   ├── logo.png
 │   ├── robots.txt
 │   ├── screenshots/        # one folder per side project (slug)
 │   ├── sitemap.xml
+│   ├── _headers            # Cloudflare Pages response headers
 │   └── google12b722e4207bfe96.html
 ├── src/
 │   ├── App.tsx

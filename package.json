@@ -8,7 +8,9 @@
     "build": "tsc -b && vite build && vite build --ssr src/entry-server.tsx --outDir dist-ssr && node scripts/prerender.mjs",
     "lint": "eslint .",
     "lint:css": "stylelint \"src/**/*.css\" --fix",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "npm run build && npx --yes wrangler@4 pages deploy dist --project-name marklan --branch main",
+    "build:redirect": "node scripts/build-redirect.mjs"
   },
   "dependencies": {
     "react": "^19.2.0",

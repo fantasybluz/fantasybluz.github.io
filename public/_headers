@@ -1,0 +1,10 @@
+# Cloudflare Pages response headers (this file is not served).
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: DENY
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+
+# Vite adds a content hash to these file names, so they never change.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
