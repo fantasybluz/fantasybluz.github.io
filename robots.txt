@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://marklan.pages.dev/sitemap.xml
+Sitemap: https://bluz.dev/sitemap.xml
