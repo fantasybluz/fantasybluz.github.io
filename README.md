@@ -1,6 +1,6 @@
 # Bluz Lan Portfolio
 
-Production website: <https://marklan.pages.dev/> (hosted on Cloudflare Pages).
+Production website: <https://bluz.dev/> (Cloudflare Pages project `marklan`; <https://marklan.pages.dev> forwards to it).
 The old address <https://fantasybluz.github.io/> forwards every path to the new site.
 
 ## 1. Overview
@@ -111,15 +111,16 @@ SEO resources are managed in:
 - `public/google12b722e4207bfe96.html` (Google Search Console HTML verification for the old `fantasybluz.github.io` property)
 - `public/_headers` (Cloudflare Pages response headers: security headers, long cache for hashed `assets/`)
 
-All absolute URLs (canonical, `hreflang`, Open Graph, JSON-LD, sitemap, robots) use `https://marklan.pages.dev`;
+All absolute URLs (canonical, `hreflang`, Open Graph, JSON-LD, sitemap, robots) use `https://bluz.dev`;
 `SITE_URL` in `scripts/prerender.mjs` must match.
 
-To track the new address in Google Search Console, add `https://marklan.pages.dev/` as a URL-prefix property
-and verify it with a new HTML file in `public/`.
+To track the new address in Google Search Console, add `bluz.dev` as a Domain property
+(verified through a DNS TXT record on Cloudflare).
 
 ## 8. Deployment Pipeline
 
-The site is hosted on Cloudflare Pages (project `marklan`, <https://marklan.pages.dev>).
+The site is hosted on Cloudflare Pages (project `marklan`) at <https://bluz.dev>; the default address
+<https://marklan.pages.dev> redirects there (script in `index.html`) and is marked `noindex` (`public/_headers`).
 
 Deploy from a laptop (needs `wrangler login` with the Cloudflare account):
 

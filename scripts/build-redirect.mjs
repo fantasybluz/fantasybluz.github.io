@@ -1,11 +1,11 @@
 // Builds the site that now lives at the old GitHub Pages address (https://fantasybluz.github.io).
-// The real site moved to Cloudflare Pages (https://marklan.pages.dev); every old URL forwards to the
+// The real site moved to Cloudflare Pages (https://bluz.dev); every old URL forwards to the
 // same path there, so shared links and search results keep working. Output: redirect-dist/
 import { copyFile, mkdir, readdir, rm, writeFile } from 'node:fs/promises'
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'
 
-const NEW_SITE = 'https://marklan.pages.dev'
+const NEW_SITE = 'https://bluz.dev'
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const outDir = path.join(root, 'redirect-dist')

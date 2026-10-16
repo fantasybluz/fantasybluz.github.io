@@ -10,7 +10,7 @@ permissions:
   contents: write
 
 jobs:
-  # The site lives on Cloudflare Pages (https://marklan.pages.dev).
+  # The site lives on Cloudflare Pages (https://bluz.dev, project `marklan`).
   # Needs the CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID repository secrets; until they are set this job
   # is skipped and the site is deployed from a laptop with `npm run deploy`.
   cloudflare-pages:

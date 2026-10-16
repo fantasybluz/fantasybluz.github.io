@@ -5,6 +5,10 @@
   X-Frame-Options: DENY
   Permissions-Policy: camera=(), microphone=(), geolocation=()
 
+# Only index the real domain (bluz.dev), not the default Pages address
+https://marklan.pages.dev/*
+  X-Robots-Tag: noindex
+
 # Vite adds a content hash to these file names, so they never change.
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
