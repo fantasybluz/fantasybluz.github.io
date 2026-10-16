@@ -287,6 +287,25 @@ const contentByLocale: Record<Locale, PageContent> = {
     ],
     sideProjects: [
       {
+        title: '摳摳 CoCo',
+        slug: 'trip-ledger',
+        tagline: '旅遊與日常分帳 App',
+        description: '出國旅行、室友、朋友各自用手機記帳，自動換成台幣、算出誰該給誰多少，最後一次結清。用 LINE 登入，邀請連結傳到群組就能加入；前後端一起部署在 Cloudflare Workers，已正式上線。',
+        highlights: [
+          '每筆花費以消費當天的匯率換成台幣（預設國際匯率，結算前可貼上台銀匯率）；可平分、依份數、指定金額，或只跟其中幾個人分。',
+          '結算以最少的轉帳次數算出誰該給誰，可把家庭、情侶合成一戶計算並記錄還款；有人還沒還清就不能刪帳本。',
+          '首頁一次看所有帳本的欠款、花費類別與每月趨勢；帳本裡的動態紀錄寫出誰新增、修改、刪除了哪一筆；在國外沒訊號也能先記，有網路再自動上傳。',
+          '每個邀請、結算連結都有自己的分享縮圖（Canvas 畫好存到 R2）；手機、平板、電腦各有版面，可加到 iPhone / Android 主畫面當 App 開。',
+          'LINE Login（OpenID Connect + PKCE），資料庫只存 session token 的雜湊、可登出所有裝置；搭配 Rate Limiting、CSP 與安全標頭。'
+        ],
+        technologies: ['React', 'TypeScript', 'Vite', 'Cloudflare Workers', 'D1', 'R2', 'LINE Login', 'OpenID Connect', 'Canvas', 'PWA', 'Vitest'],
+        screenshots: [
+          { src: '/screenshots/trip-ledger/home.jpg', alt: '摳摳 CoCo 電腦版首頁：欠款、花費類別圓餅圖與每月花費' },
+          { src: '/screenshots/trip-ledger/ledger.jpg', alt: '摳摳 CoCo 旅行帳本：每天的花費與換算後的台幣' }
+        ],
+        links: [{ label: '網站', url: 'https://trip-ledger.fantasybluz.workers.dev' }]
+      },
+      {
         title: '零售管理系統',
         slug: 'retail-system',
         tagline: '報價、訂單、庫存與營收一站式管理',
@@ -304,14 +323,15 @@ const contentByLocale: Record<Locale, PageContent> = {
         title: 'mneme',
         slug: 'mneme',
         tagline: '結合本機 LLM 與 AI Agent 的個人知識庫',
-        description: '像 Notion 的筆記、資料庫、待辦與日記系統，部署在自架主機、只有自己的 Tailscale 裝置連得到；語意搜尋與問答都由本機模型處理，筆記內容不會送到外面。',
+        description: '像 Notion 的筆記、資料庫、待辦與日記系統，部署在自架主機：平常透過 Tailscale 連線，在外面則經 Cloudflare Tunnel 登入。語意搜尋與問答都由本機模型處理，筆記內容不會送到外面。',
         highlights: [
           '語意搜尋：以 Ollama bge-m3 產生向量、存進 PostgreSQL pgvector，用詞不同也找得到；中文關鍵字搜尋使用 pg_trgm。',
           '問 mneme（RAG）：用一句話問自己的筆記，挑出最相關的段落交給本機 LLM 回答，並以 [1]、[2] 標出引用來源。',
           'MCP Server：讓 Claude Code 搜尋、讀取筆記並寫入工作日誌與開發紀錄；只開放指定分類，只能查詢與新增。',
-          '區塊編輯器、巢狀頁面、資料庫（表格 / 看板 / 行事曆）與版本紀錄，並與 Google 行事曆雙向同步。'
+          '區塊編輯器、巢狀頁面、資料庫（表格 / 看板 / 行事曆）與版本紀錄，並與 Google 行事曆雙向同步。',
+          '外網連線：Cloudflare Tunnel 不用開任何對外的埠，Cloudflare Access 只放行指定的 email；後端再自己驗一次 Access 的 JWT（RS256 簽章、發行者、AUD、效期、email 白名單），MCP 仍只開放在 Tailscale。'
         ],
-        technologies: ['Go', 'Gin', 'PostgreSQL', 'pgvector', 'Ollama', 'RAG', 'MCP', 'React', 'TypeScript', 'Tailwind CSS', 'Podman', 'Tailscale'],
+        technologies: ['Go', 'Gin', 'PostgreSQL', 'pgvector', 'Ollama', 'RAG', 'MCP', 'React', 'TypeScript', 'Tailwind CSS', 'Podman', 'Tailscale', 'Cloudflare Tunnel', 'Cloudflare Access'],
         screenshots: []
       },
       {
@@ -356,6 +376,42 @@ const contentByLocale: Record<Locale, PageContent> = {
         ],
         technologies: ['Python', 'FastAPI', 'React', 'TypeScript', 'PyTorch', 'diffusers', 'FLUX.1', 'SDXL', 'Docker'],
         screenshots: []
+      },
+      {
+        title: '超商調酒拉霸機',
+        slug: 'cocktail-party',
+        tagline: '像素風的聚會喝酒小工具',
+        description: '拉一下拉霸機，用超商買得到的酒和飲料轉出一杯調酒；再加上一支手機就能大家輪流玩的喝酒遊戲。純前端靜態網站，放在 Cloudflare Pages，貼到 LINE 群組就能直接開。',
+        highlights: [
+          '三個轉輪（基酒、材料一、材料二）轉出 27 種現成酒譜，附比例、口感與估算的酒感、甜度、氣泡；可鎖定家裡有的酒，只轉那支酒的酒譜。',
+          '惡魔開關：機台變暗紅色，只轉出高濃度組合（約 19～26%），每杯寫出容易醉的原因。',
+          '20 種喝酒遊戲加 2 個聚會工具，輸了可以直接去轉拉霸機，或記到喝酒記分板，最後出派對結算。',
+          '依人數算出「買最少、能做最多杯」的採買清單；GoatCounter 計算來訪人數，不用 cookie。'
+        ],
+        technologies: ['React', 'TypeScript', 'Vite', 'Canvas', 'Cloudflare Pages', 'GitHub Actions', 'Vitest'],
+        screenshots: [{ src: '/screenshots/cocktail-party/slot.jpg', alt: '超商調酒拉霸機：三個轉輪、拉桿與惡魔開關' }],
+        links: [
+          { label: '網站', url: 'https://drunk.bluz.dev' },
+          { label: 'GitHub', url: 'https://github.com/fantasybluz/cocktail-party' }
+        ]
+      },
+      {
+        title: '台灣隨機旅行',
+        slug: 'taiwan-random-trip',
+        tagline: '搭火車的隨機旅行轉盤',
+        description: '分三層轉：地區、縣市、車站，轉到哪就去哪。有區間車（240 站）和自強3000（76 站）兩個版本，車站與班次資料來自台鐵開放資料。',
+        highlights: [
+          '像素風轉盤以 Canvas 逐像素繪製，轉動時每一幀照新角度重畫，像素永遠是正的；字型用俐方體 11 號。',
+          '轉到車站後出一張「車票」：地址、一天大約幾班停，附 Google 地圖與維基百科連結；班次太少會提醒先查回程。',
+          '可排除不想去的縣市，轉盤與站數跟著扣掉；只剩一個選項的那層直接選好，不用轉。',
+          '腳本從台鐵開放資料抓一週時刻表，算出每站停幾班；用「騰雲座艙」辨識 EMU3000，台鐵改車種代碼時會發出警告。'
+        ],
+        technologies: ['React', 'TypeScript', 'Vite', 'Canvas', 'Node.js', 'TRA Open Data', 'Vitest'],
+        screenshots: [{ src: '/screenshots/taiwan-random-trip/wheel.jpg', alt: '台灣隨機旅行：區間車版本的地區轉盤' }],
+        links: [
+          { label: '網站', url: 'https://fantasybluz.github.io/taiwan-random-trip/' },
+          { label: 'GitHub', url: 'https://github.com/fantasybluz/taiwan-random-trip' }
+        ]
       }
     ],
     credentials: [
@@ -609,6 +665,25 @@ const contentByLocale: Record<Locale, PageContent> = {
     ],
     sideProjects: [
       {
+        title: 'CoCo',
+        slug: 'trip-ledger',
+        tagline: 'Expense splitting for trips and everyday life',
+        description: 'Friends, roommates, and travel groups each log expenses on their own phones; the app converts everything to TWD, works out who owes whom, and settles up in one go. Sign in with LINE and join from an invite link in the group chat. Frontend and API ship together on Cloudflare Workers and are live in production.',
+        highlights: [
+          'Each expense is converted at that day\'s exchange rate (market rate by default, or pasted Bank of Taiwan rates before settling); split evenly, by shares, by exact amounts, or among just a few people.',
+          'Settlement finds the fewest transfers, can group families and couples into one household, and records repayments; a ledger cannot be deleted while anyone still owes money.',
+          'The home page sums up balances, spending by category, and monthly trends across every ledger; an activity feed shows who added, edited, or deleted what; expenses logged offline abroad upload once the phone is back online.',
+          'Every invite and settlement link gets its own share image (drawn on Canvas and stored in R2); separate phone, tablet, and desktop layouts, and installable to the iPhone / Android home screen.',
+          'LINE Login (OpenID Connect + PKCE) with only session-token hashes stored and sign-out from all devices, plus rate limiting, CSP, and security headers.'
+        ],
+        technologies: ['React', 'TypeScript', 'Vite', 'Cloudflare Workers', 'D1', 'R2', 'LINE Login', 'OpenID Connect', 'Canvas', 'PWA', 'Vitest'],
+        screenshots: [
+          { src: '/screenshots/trip-ledger/home.jpg', alt: 'CoCo desktop home: balances, spending by category, and monthly spending' },
+          { src: '/screenshots/trip-ledger/ledger.jpg', alt: 'CoCo trip ledger: daily expenses with their TWD amounts' }
+        ],
+        links: [{ label: 'Live site', url: 'https://trip-ledger.fantasybluz.workers.dev' }]
+      },
+      {
         title: 'Retail Management System',
         slug: 'retail-system',
         tagline: 'Quotes, orders, inventory, and revenue in one place',
@@ -626,14 +701,15 @@ const contentByLocale: Record<Locale, PageContent> = {
         title: 'mneme',
         slug: 'mneme',
         tagline: 'Personal knowledge base with local LLMs and AI agent access',
-        description: 'A Notion-style app for notes, databases, to-dos, and a journal, self-hosted and reachable only from my own Tailscale devices. Semantic search and Q&A run on local models, so notes never leave the machine.',
+        description: 'A Notion-style app for notes, databases, to-dos, and a journal, self-hosted and reached over Tailscale at home and through Cloudflare Tunnel when I am out. Semantic search and Q&A run on local models, so notes never leave the machine.',
         highlights: [
           'Semantic search: Ollama bge-m3 embeddings stored in PostgreSQL pgvector find notes even when the wording differs; pg_trgm handles Chinese keyword search.',
           'Ask mneme (RAG): ask a question in plain language; the most relevant passages go to a local LLM, which answers with [1], [2] citations back to the notes.',
           'MCP server: lets Claude Code search and read notes and append to work logs and dev logs, limited to chosen categories and to read and append only.',
-          'Block editor, nested pages, databases (table / board / calendar), version history, and two-way sync with Google Calendar.'
+          'Block editor, nested pages, databases (table / board / calendar), version history, and two-way sync with Google Calendar.',
+          'Remote access: Cloudflare Tunnel opens no inbound ports and Cloudflare Access admits only listed emails; the backend verifies the Access JWT itself (RS256 signature, issuer, audience, expiry, email allow-list), and MCP stays Tailscale-only.'
         ],
-        technologies: ['Go', 'Gin', 'PostgreSQL', 'pgvector', 'Ollama', 'RAG', 'MCP', 'React', 'TypeScript', 'Tailwind CSS', 'Podman', 'Tailscale'],
+        technologies: ['Go', 'Gin', 'PostgreSQL', 'pgvector', 'Ollama', 'RAG', 'MCP', 'React', 'TypeScript', 'Tailwind CSS', 'Podman', 'Tailscale', 'Cloudflare Tunnel', 'Cloudflare Access'],
         screenshots: []
       },
       {
@@ -678,6 +754,42 @@ const contentByLocale: Record<Locale, PageContent> = {
         ],
         technologies: ['Python', 'FastAPI', 'React', 'TypeScript', 'PyTorch', 'diffusers', 'FLUX.1', 'SDXL', 'Docker'],
         screenshots: []
+      },
+      {
+        title: 'Convenience Store Cocktail Slots',
+        slug: 'cocktail-party',
+        tagline: 'Pixel-art drinking game kit for parties',
+        description: 'Pull the lever and the slot machine mixes a cocktail from drinks you can buy at any convenience store, alongside party games that everyone plays on one phone. A static frontend on Cloudflare Pages that opens straight from a LINE group chat.',
+        highlights: [
+          'Three reels (base spirit, mixer, extra) land on 27 ready-made recipes with ratios, flavor notes, and estimated strength, sweetness, and fizz; lock a reel to the bottle you already have.',
+          'Devil switch: the machine turns dark red and only spins high-ABV combos (about 19–26%), each with a note on why it hits hard.',
+          '20 one-phone drinking games plus 2 party tools; losers can jump straight to the slot machine or log a drink on the scoreboard, which feeds an end-of-party summary.',
+          'Shopping lists by group size that buy the fewest items for the most recipes; cookie-free visit counts with GoatCounter.'
+        ],
+        technologies: ['React', 'TypeScript', 'Vite', 'Canvas', 'Cloudflare Pages', 'GitHub Actions', 'Vitest'],
+        screenshots: [{ src: '/screenshots/cocktail-party/slot.jpg', alt: 'Cocktail slot machine with three reels, a lever, and the devil switch' }],
+        links: [
+          { label: 'Live site', url: 'https://drunk.bluz.dev' },
+          { label: 'GitHub', url: 'https://github.com/fantasybluz/cocktail-party' }
+        ]
+      },
+      {
+        title: 'Taiwan Random Trip',
+        slug: 'taiwan-random-trip',
+        tagline: 'Spin the wheel, take the train',
+        description: 'Spin three times: region, county, then station, and go wherever it lands. Two versions cover local trains (240 stations) and EMU3000 express trains (76 stations), built from Taiwan Railway open data.',
+        highlights: [
+          'A pixel-art wheel drawn pixel by pixel on Canvas and redrawn every frame at the new angle, so pixels stay square while it spins; set in the Cubic 11 pixel font.',
+          'Landing on a station prints a "ticket" with its address, roughly how many trains stop each day, and Google Maps and Wikipedia links, with a warning to check the way back when service is sparse.',
+          'Exclude counties you do not want and the wheels and station counts shrink to match; a level with only one option left is picked automatically.',
+          'A script pulls a week of timetables from the open data to count stops per station, spotting EMU3000 services by their premium car and warning when the railway changes its train-type codes.'
+        ],
+        technologies: ['React', 'TypeScript', 'Vite', 'Canvas', 'Node.js', 'TRA Open Data', 'Vitest'],
+        screenshots: [{ src: '/screenshots/taiwan-random-trip/wheel.jpg', alt: 'Taiwan Random Trip: the region wheel for local trains' }],
+        links: [
+          { label: 'Live site', url: 'https://fantasybluz.github.io/taiwan-random-trip/' },
+          { label: 'GitHub', url: 'https://github.com/fantasybluz/taiwan-random-trip' }
+        ]
       }
     ],
     credentials: [
