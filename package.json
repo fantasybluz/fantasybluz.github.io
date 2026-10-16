@@ -10,7 +10,8 @@
     "lint:css": "stylelint \"src/**/*.css\" --fix",
     "preview": "vite preview",
     "deploy": "npm run build && npx --yes wrangler@4 pages deploy dist --project-name marklan --branch main",
-    "build:redirect": "node scripts/build-redirect.mjs"
+    "build:redirect": "node scripts/build-redirect.mjs",
+    "og": "node scripts/render-og.mjs"
   },
   "dependencies": {
     "react": "^19.2.0",

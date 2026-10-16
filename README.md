@@ -103,7 +103,7 @@ SEO resources are managed in:
 
 - `index.html`
   - `meta` description/robots/canonical
-  - Open Graph and Twitter cards
+  - Open Graph and Twitter cards; the link-preview image is `public/og-zh.png` / `public/og-en.png` (1200 × 630), set per locale from `ogImage` in `src/locale.ts`
   - `hreflang` alternates for `zh-Hant`, `en`, and `x-default`
   - JSON-LD graph (`WebSite`, `ProfilePage`, `Person`)
   - Per-locale values are overwritten at build time from `src/locale.ts`
@@ -169,7 +169,8 @@ GitHub Actions (`.github/workflows/deploy.yml`, on push to `main`) runs two jobs
 - Update resume content: edit `contentByLocale` in `src/App.tsx`
 - Add side-project screenshots: put images in `public/screenshots/<slug>/`, then list them in that project's `screenshots` (e.g. `{ src: '/screenshots/mneme/home.png', alt: '...' }`) in both `zh` and `en`. Images are shown at 16:10, cropped from the top; extra screenshots scroll sideways. While the list is empty, `npm run dev` shows a dashed placeholder with the folder path, and the production build shows nothing.
 - Add side-project links (repo, demo): add `links` to that project, e.g. `[{ label: 'GitHub', url: '...' }]`
-- Update profile image: replace `public/Bluz_Lan.jpg`
+- Update profile image: replace `public/Bluz_Lan.jpg`, then run `npm run og` (the link-preview cards use the same photo)
+- Update the link-preview card: edit `scripts/og/card.html`, then run `npm run og` to re-render `public/og-zh.png` and `public/og-en.png` with the local Chrome (`CHROME=/path/to/chrome` if it is elsewhere). Commit the PNGs; LINE and Facebook cache previews, so rename the files when changing the card if old shares must update
 - Update favicon/logo: replace `public/logo.png`
 - Update per-locale title/description: edit `seoByLocale` in `src/locale.ts`
 - Update shared SEO metadata (JSON-LD, image, hreflang): edit `index.html`, `public/robots.txt`, `public/sitemap.xml`

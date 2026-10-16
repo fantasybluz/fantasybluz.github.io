@@ -15,6 +15,8 @@ export interface SeoContent {
   title: string
   description: string
   ogLocale: string
+  // Link-preview card, rendered by `npm run og` from scripts/og/card.html
+  ogImage: string
   imageAlt: string
 }
 
@@ -26,7 +28,8 @@ export const seoByLocale: Record<Locale, SeoContent> = {
     description:
       '藍詠弘（Bluz Lan）個人履歷網站，聚焦後端、前端、雲端、DevOps 與 ML，具 OpenStack、Kubernetes、GPU 平台整合實務經驗。',
     ogLocale: 'zh_TW',
-    imageAlt: '藍詠弘 Bluz Lan 個人照片'
+    ogImage: '/og-zh.png',
+    imageAlt: '藍詠弘 Bluz Lan，軟體工程師：後端、前端、雲端、DevOps 與 AI Agent'
   },
   en: {
     htmlLang: 'en',
@@ -34,6 +37,7 @@ export const seoByLocale: Record<Locale, SeoContent> = {
     description:
       'Software Engineer portfolio of Bluz Lan, focused on backend, frontend, cloud, DevOps, and ML with hands-on OpenStack, Kubernetes, and GPU platform integration.',
     ogLocale: 'en_US',
-    imageAlt: 'Portrait of Bluz Lan'
+    ogImage: '/og-en.png',
+    imageAlt: 'Bluz Lan, Software Engineer: backend, frontend, cloud, DevOps, and AI agents'
   }
 }

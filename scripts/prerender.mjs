@@ -53,9 +53,11 @@ function renderPage(locale) {
   html = setMeta(html, 'property', 'og:description', seo.description)
   html = setMeta(html, 'property', 'og:locale', seo.ogLocale)
   html = setMeta(html, 'property', 'og:locale:alternate', seoByLocale[otherLocale].ogLocale)
+  html = setMeta(html, 'property', 'og:image', `${SITE_URL}${seo.ogImage}`)
   html = setMeta(html, 'property', 'og:image:alt', seo.imageAlt)
   html = setMeta(html, 'name', 'twitter:title', seo.title)
   html = setMeta(html, 'name', 'twitter:description', seo.description)
+  html = setMeta(html, 'name', 'twitter:image', `${SITE_URL}${seo.ogImage}`)
   html = setMeta(html, 'name', 'twitter:image:alt', seo.imageAlt)
   html = replaceOnce(
     html,
