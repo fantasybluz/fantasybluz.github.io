@@ -26,7 +26,8 @@ Each locale is prerendered to static HTML at build time, so crawlers receive ful
 - Locale routing and SEO strings: `src/locale.ts`
 - Build-time rendering: `src/entry-server.tsx` + `scripts/prerender.mjs`
 - Component styling: `src/App.css`
-- Global styling: `src/index.css`
+- Global styling and design tokens: `src/index.css`
+- Visual design reference: `DESIGN.md` (Apple-style, from `npx getdesign@latest add apple`); read it before changing any UI
 - Static assets: `public/`
 - HTML shell + SEO metadata: `index.html`
 

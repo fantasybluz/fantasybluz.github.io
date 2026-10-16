@@ -80,6 +80,8 @@ interface PageContent {
     greeting: string
     name: string
     detailLine: string
+    primaryCta: string
+    secondaryCta: string
   }
   about: {
     title: string
@@ -124,7 +126,9 @@ const contentByLocale: Record<Locale, PageContent> = {
     hero: {
       greeting: 'Hi, 我是',
       name: 'Bluz',
-      detailLine: '「簡單，往往比複雜更難做到。」— Steve Jobs'
+      detailLine: '「簡單，往往比複雜更難做到。」— Steve Jobs',
+      primaryCta: '聯絡我',
+      secondaryCta: '看看作品'
     },
     about: {
       title: '關於我',
@@ -515,7 +519,9 @@ const contentByLocale: Record<Locale, PageContent> = {
     hero: {
       greeting: 'Hi, I am',
       name: 'Bluz Lan',
-      detailLine: '"Simple can be harder than complex." — Steve Jobs'
+      detailLine: '"Simple can be harder than complex." — Steve Jobs',
+      primaryCta: 'Get in touch',
+      secondaryCta: 'See my work'
     },
     about: {
       title: 'About Me',
@@ -968,34 +974,6 @@ function App({ locale }: AppProps) {
 
   return (
     <div className="app">
-      {/* Background Effects — Dot Pattern + Meteor Shower + Glow Orbs */}
-      <div className="bg-effects">
-        <div className="grid-dots"></div>
-        <div className="glow-orb orb-1"></div>
-        <div className="glow-orb orb-2"></div>
-        <div className="glow-orb orb-3"></div>
-        <span className="meteor m-1"></span>
-        <span className="meteor m-2"></span>
-        <span className="meteor m-3"></span>
-        <span className="meteor m-4"></span>
-        <span className="meteor m-5"></span>
-        <span className="meteor m-6"></span>
-        <span className="meteor m-7"></span>
-        <span className="meteor m-8"></span>
-        <span className="meteor m-9"></span>
-        <span className="meteor m-10"></span>
-        <span className="meteor m-11"></span>
-        <span className="meteor m-12"></span>
-        <span className="meteor m-13"></span>
-        <span className="meteor m-14"></span>
-        <span className="meteor m-15"></span>
-        <span className="meteor m-16"></span>
-        <span className="meteor m-17"></span>
-        <span className="meteor m-18"></span>
-        <span className="meteor m-19"></span>
-        <span className="meteor m-20"></span>
-      </div>
-
       {/* Header */}
       <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
         <nav className="navbar">
@@ -1064,10 +1042,13 @@ function App({ locale }: AppProps) {
         <section className="hero">
           <div className="hero-content">
             <h1>
-              {content.hero.greeting} <strong>{content.hero.name}</strong><span className="cursor" aria-hidden="true"></span>
+              {content.hero.greeting} <strong>{content.hero.name}</strong>
             </h1>
             {content.hero.detailLine ? <p>{content.hero.detailLine}</p> : null}
-            <div className="hero-divider"></div>
+            <div className="hero-actions">
+              <a href="#contact" className="button-primary">{content.hero.primaryCta}</a>
+              <a href="#side-projects" className="button-secondary">{content.hero.secondaryCta}</a>
+            </div>
           </div>
         </section>
 
@@ -1140,10 +1121,7 @@ function App({ locale }: AppProps) {
                   <h3>{skillGroup.category}</h3>
                   <ul>
                     {skillGroup.items.map((item) => (
-                      <li key={item}>
-                        <span className="skill-dot"></span>
-                        {item}
-                      </li>
+                      <li key={item}>{item}</li>
                     ))}
                   </ul>
                 </div>
