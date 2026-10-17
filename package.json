@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build && vite build --ssr src/entry-server.tsx --outDir dist-ssr && node scripts/prerender.mjs",
+    "build": "node scripts/check-docs.mjs && tsc -b && vite build && vite build --ssr src/entry-server.tsx --outDir dist-ssr && node scripts/prerender.mjs",
     "lint": "eslint .",
+    "check:docs": "node scripts/check-docs.mjs",
     "lint:css": "stylelint \"src/**/*.css\" --fix",
     "preview": "vite preview",
     "deploy": "npm run build && npx --yes wrangler@4 pages deploy dist --project-name marklan --branch main",

@@ -1,6 +1,6 @@
 // Writes one prerendered HTML file per page and locale (dist/index.html, dist/en/index.html,
 // dist/changelog/index.html, dist/en/changelog/index.html) and stamps sitemap lastmod with the build date.
-// Fails the build first if VERSION, CHANGELOG.md, and CHANGELOG.en.md disagree.
+// Fails the build first if VERSION, CHANGELOG.md, and CHANGELOG.en.md disagree, or a page is missing from the sitemap.
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import path from 'node:path'
@@ -20,6 +20,16 @@ if (changelogProblems.length > 0) {
   throw new Error(`prerender: changelog check failed (see RELEASING.md)\n- ${changelogProblems.join('\n- ')}`)
 }
 console.log('prerender: VERSION matches CHANGELOG.md and CHANGELOG.en.md')
+
+const sitemapPath = path.join(distDir, 'sitemap.xml')
+const sitemap = await readFile(sitemapPath, 'utf8')
+// Every page in pagePaths must be in public/sitemap.xml (docs/README.md, "Where to change what")
+const missing = Object.values(pagePaths)
+  .flatMap((paths) => Object.values(paths))
+  .filter((pagePath) => !sitemap.includes(`<loc>${SITE_URL}${pagePath}</loc>`))
+if (missing.length > 0) {
+  throw new Error(`prerender: public/sitemap.xml has no <loc> for ${missing.join(', ')}`)
+}
 
 const template = await readFile(path.join(distDir, 'index.html'), 'utf8')
 
@@ -95,9 +105,7 @@ for (const page of Object.keys(pagePaths)) {
   }
 }
 
-const sitemapPath = path.join(distDir, 'sitemap.xml')
 const today = new Date().toISOString().slice(0, 10)
-const sitemap = await readFile(sitemapPath, 'utf8')
 await writeFile(sitemapPath, sitemap.replace(/<lastmod>[^<]*<\/lastmod>/g, `<lastmod>${today}</lastmod>`))
 console.log(`prerender: sitemap lastmod = ${today}`)
 
