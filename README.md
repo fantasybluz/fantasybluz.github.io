@@ -23,7 +23,8 @@ Each locale is prerendered to static HTML at build time, so crawlers receive ful
 
 - Entry point: `src/main.tsx` (picks the locale from the URL path, hydrates prerendered HTML)
 - Application container and content model: `src/App.tsx`
-- Locale routing and SEO strings: `src/locale.ts`
+- Locale and page routing, SEO strings: `src/locale.ts`
+- Version and changelog: `VERSION`, `CHANGELOG.md` (zh), `CHANGELOG.en.md` (en), `src/changelog.ts`, `src/Changelog.tsx`; release steps in `RELEASING.md`
 - Build-time rendering: `src/entry-server.tsx` + `scripts/prerender.mjs`
 - Component styling: `src/App.css`
 - Global styling and design tokens: `src/index.css`
@@ -42,10 +43,11 @@ Locale-specific SEO content (`title`, `description`, `ogLocale`, `imageAlt`) liv
 
 ### 3.2 Locale Routing and Prerendering
 
-- The URL decides the language: `/` renders `zh`, `/en/` renders `en`. There is no browser-language redirect, so crawlers can reach both versions.
+- The URL decides the language and page: `/` and `/changelog/` render `zh`, `/en/` and `/en/changelog/` render `en`. There is no browser-language redirect, so crawlers can reach both versions.
 - The language switcher is a pair of links to those URLs.
 - `npm run build` runs three steps: the client build, an SSR build of `src/entry-server.tsx` into `dist-ssr/`, then `scripts/prerender.mjs`.
-- `scripts/prerender.mjs` writes `dist/index.html` and `dist/en/index.html`, rewriting each page's `lang`, title, description, canonical, Open Graph, and Twitter tags from `seoByLocale`. It fails the build if an expected tag is missing from `index.html`.
+- `scripts/prerender.mjs` writes `index.html` for every page in `pagePaths` (`dist/`, `dist/en/`, `dist/changelog/`, `dist/en/changelog/`), rewriting each page's `lang`, title, description, canonical, `hreflang`, Open Graph, and Twitter tags.
+- It first checks that `VERSION` matches the newest release in `CHANGELOG.md` and `CHANGELOG.en.md` and that both files list the same releases; the build fails otherwise. It fails the build if an expected tag is missing from `index.html`.
 - It also stamps every `<lastmod>` in `dist/sitemap.xml` with the build date, then removes `dist-ssr/`.
 
 ## 4. Prerequisites
@@ -142,6 +144,10 @@ GitHub Actions (`.github/workflows/deploy.yml`, on push to `main`) runs two jobs
 ```text
 .
 ├── .github/workflows/deploy.yml
+├── CHANGELOG.md            # zh changelog, shown at /changelog/
+├── CHANGELOG.en.md         # en changelog, shown at /en/changelog/
+├── RELEASING.md
+├── VERSION
 ├── index.html
 ├── scripts/
 │   ├── prerender.mjs
@@ -157,6 +163,8 @@ GitHub Actions (`.github/workflows/deploy.yml`, on push to `main`) runs two jobs
 ├── src/
 │   ├── App.tsx
 │   ├── App.css
+│   ├── Changelog.tsx       # changelog page
+│   ├── changelog.ts        # changelog parser + build-time check
 │   ├── entry-server.tsx
 │   ├── index.css
 │   ├── locale.ts
@@ -167,6 +175,7 @@ GitHub Actions (`.github/workflows/deploy.yml`, on push to `main`) runs two jobs
 ## 10. Common Update Scenarios
 
 - Update resume content: edit `contentByLocale` in `src/App.tsx`
+- Record a change or release a version: see `RELEASING.md` (the footer shows `v<VERSION>` and links to the changelog page)
 - Add side-project screenshots: put images in `public/screenshots/<slug>/`, then list them in that project's `screenshots` (e.g. `{ src: '/screenshots/mneme/home.png', alt: '...' }`) in both `zh` and `en`. Images are shown at 16:10, cropped from the top; extra screenshots scroll sideways. While the list is empty, `npm run dev` shows a dashed placeholder with the folder path, and the production build shows nothing.
 - Add side-project links (repo, demo): add `links` to that project, e.g. `[{ label: 'GitHub', url: '...' }]`
 - Update profile image: replace `public/Bluz_Lan.jpg`, then run `npm run og` (the link-preview cards use the same photo)

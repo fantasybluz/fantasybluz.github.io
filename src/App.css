@@ -633,9 +633,115 @@ section h2 {
   display: none;
 }
 
-.footer p {
+.footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 24px;
   max-width: 1024px;
   margin: 0 auto;
+}
+
+/* Quiet version label: muted like the rest of the fine print, blue only on hover */
+.footer-version {
+  color: var(--ink-muted-48);
+  white-space: nowrap;
+}
+
+.footer-version:hover,
+.footer-version[aria-current='page'] {
+  color: var(--primary);
+}
+
+/* ===== Changelog page (/changelog/, /en/changelog/) ===== */
+.changelog {
+  flex: 1;
+  padding: 96px 0 80px;
+}
+
+.changelog-container {
+  max-width: 736px;
+}
+
+.changelog h1 {
+  font-family: var(--font-display);
+  font-size: 56px;
+  font-weight: 600;
+  line-height: 1.07;
+  letter-spacing: var(--display-tracking, 0);
+}
+
+.changelog-build {
+  margin-top: 12px;
+  color: var(--ink-muted-48);
+  font-size: 14px;
+}
+
+.changelog-releases {
+  margin-top: 56px;
+  list-style: none;
+}
+
+/* Version and date on the left, items on the right; hairlines between releases */
+.changelog-release {
+  display: grid;
+  grid-template-columns: 160px minmax(0, 1fr);
+  gap: 24px;
+  padding: 32px 0;
+  border-top: 1px solid var(--hairline);
+}
+
+.changelog-release-head {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: var(--ink-muted-48);
+  font-size: 14px;
+}
+
+.changelog-release-head h2 {
+  margin: 0;
+  color: var(--ink);
+  font-size: 21px;
+  line-height: 1.19;
+}
+
+.changelog-items {
+  display: grid;
+  gap: 10px;
+  list-style: none;
+  color: var(--ink-muted-80);
+}
+
+.changelog-items li {
+  position: relative;
+  padding-left: 16px;
+}
+
+.changelog-items li::before {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 0.68em;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--ink-muted-48);
+}
+
+.changelog-items li strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.changelog-back {
+  display: inline-block;
+  margin-top: 24px;
+}
+
+.changelog-back::after {
+  content: ' ›';
 }
 
 /* ===== Responsive ===== */
@@ -761,6 +867,30 @@ section h2 {
 
   .contact {
     padding: 72px 0;
+  }
+
+  .changelog {
+    padding: 64px 0;
+  }
+
+  .changelog h1 {
+    font-size: 40px;
+  }
+
+  .changelog-releases {
+    margin-top: 40px;
+  }
+
+  .changelog-release {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding: 28px 0;
+  }
+
+  .changelog-release-head {
+    flex-flow: row wrap;
+    align-items: baseline;
+    gap: 4px 12px;
   }
 }
 
