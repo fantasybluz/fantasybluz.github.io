@@ -5,13 +5,16 @@ newest first, headings are "## version - date". See `RELEASING.md` for how to cu
 
 ## Unreleased
 
+## 2.1.0 - 2026-10-17
+
+- The footer shows the **version number**, which opens this **changelog**
+
 ## 2.0.0 - 2026-10-16
 
 - The site moved to **bluz.dev** on Cloudflare Pages; every page of the old fantasybluz.github.io address forwards to the new one
 - **Redesigned** after Apple's design language: a thin translucent black nav bar, sections alternating white, light gray, and black, a single blue accent, and a full-screen menu on phones
 - New **link-preview cards** when the site is shared on LINE or Facebook, one per language
 - Side projects: added **CoCo**, the **Convenience Store Cocktail Slots**, and **Taiwan Random Trip**, with screenshots and live-site links
-- The footer shows the **version number**, which opens this **changelog**
 
 ## 1.4.0 - 2026-10-07
 
