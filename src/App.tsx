@@ -227,7 +227,7 @@ const contentByLocale: Record<Locale, PageContent> = {
               '整合 MOXA NPort 序列設備伺服器，連接現場設備並提升門禁與監控系統穩定度。',
               '參與高雄捷運通勤助理 App（Xamarin / .NET Framework），負責 UI 與後端邏輯整合。',
               '以 paddleOCR 開發首/末班車倒數辨識功能。',
-              '使用 pandas / NumPy 進行運料資料處理與圖形化分析。',
+              '使用 pandas / NumPy 進行備料庫存資料處理與圖形化分析。',
               '與營運及 IT 團隊釐清需求、於測試環境驗證功能行為，並支援正式環境部署。',
               '維護既有模組（除錯與重構舊程式碼），提升系統穩定性與可維護性。'
             ]
@@ -616,7 +616,7 @@ const contentByLocale: Record<Locale, PageContent> = {
               'Developed ERP access-control modules with Vue.js frontend and Java Spring MVC / Spring Boot backend on DB2.',
               'Integrated MOXA NPort serial device servers with existing systems.',
               'Contributed to the Kaohsiung Metro Commuter Assistant app using Xamarin (.NET Framework).',
-              'Implemented OCR use cases and data processing workflows (pandas / NumPy) for internal operational scenarios.'
+              'Built a PaddleOCR feature that reads first/last train countdowns, and processed and charted spare-parts inventory data with pandas / NumPy.'
             ]
           }
         ]

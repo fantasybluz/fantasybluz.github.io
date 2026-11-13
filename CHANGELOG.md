@@ -5,6 +5,7 @@
 
 ## 未發佈
 
+- 高雄捷運經歷的資料分析改寫成**備料庫存資料**
 - 工作經驗、關於我、專業摘要與代表性專案的 **Chthonia** 改寫成現在的主軸：**Baremetal Provider（Kubernetes Operator）＋ gaia 中介層**；技能補上 RabbitMQ、gRPC、OpenTelemetry、Redfish 等
 - 履歷的競賽與活動拿掉**全國計算機多媒體綜合能力與人工智能素養及商務專業應用大賽**的 5 筆得獎紀錄
 
