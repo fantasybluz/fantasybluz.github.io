@@ -171,8 +171,8 @@ const contentByLocale: Record<Locale, PageContent> = {
               '維護 gaia 中介層：作為 PaaS 與各 Provider 之間的唯一出入口，接收 RabbitMQ 指令、以 gRPC 呼叫 Provider；實作 request-id 冪等、K8s apiserver 短暫中斷時自動重試與死信佇列，避免指令被重複套用或靜默遺失。',
               '設計裸機多租戶網路隔離（每個租戶預建 fixed-IP port），以及安全群組管理：平台基線規則與使用者規則分開，同一容錯組的伺服器自動互通。',
               '實作機器歸還清碟：以 Ironic runbook 執行深層 / 淺層磁碟清除，讀回結果通過檢查才把節點放回資源池，避免資料留給下一位租戶；另實作寬限期，以卸下 / 綁回 Floating IP 鎖定對外存取。',
-              '延伸 WebSocket BMC Console（VNC / Serial）支援 GB200（AMI MegaRAC）：由平台代理 KVM 與 Serial 連線，瀏覽器拿不到 BMC 位址與憑證，每個 session 只綁定單一節點。',
-              '強化可觀測性與測試：以 OpenTelemetry / Jaeger 串起 PaaS → gaia → Provider 的完整 trace，以 envtest / E2E 補齊測試；自建 Provider Dashboard 即時顯示 CR 狀態，並以 Proxmox VM + Redfish 模擬 GB200 / H200 節點供開發與展示。',
+              '延伸 WebSocket BMC Console（VNC / Serial）支援新世代 GPU 伺服器：由平台代理 KVM 與 Serial 連線，瀏覽器拿不到 BMC 位址與憑證，每個 session 只綁定單一節點。',
+              '強化可觀測性與測試：以 OpenTelemetry / Jaeger 串起 PaaS → gaia → Provider 的完整 trace，以 envtest / E2E 補齊測試；自建 Provider Dashboard 即時顯示 CR 狀態，並以 Proxmox VM + Redfish 模擬 GPU 裸機節點供開發與展示。',
               '撰寫 PRD / SA，與 Product、OpenStack、QA 團隊對齊介面契約，並直接協助 PaaS 端（Go 後端、Next.js 前端）串接裸機功能。',
               '前期建構 Next.js + TypeScript 前端 Monorepo（Turborepo + pnpm），以及 GitHub Actions CI/CD（Lint、測試、Security Scan、Multi-arch 映像建置與 Helm GitOps 部署）。'
             ]
@@ -250,7 +250,7 @@ const contentByLocale: Record<Locale, PageContent> = {
       },
       {
         category: '雲端、容器與 DevOps',
-        items: ['Docker / Podman', 'Kubernetes', 'Kubernetes Operator（Kubebuilder / controller-runtime / envtest）', 'Helm + GitOps 部署', 'OpenStack（Ironic / Nova / Neutron）', 'OpenTelemetry / Jaeger 分散式追蹤', 'Redfish / BMC（AMI MegaRAC）', 'GitHub Actions', 'Azure DevOps Pipeline', 'GitLab CI/CD', 'Multi-arch 容器映像建置', 'GPU 裸機納管與生命週期管理', 'Tailscale']
+        items: ['Docker / Podman', 'Kubernetes', 'Kubernetes Operator（Kubebuilder / controller-runtime / envtest）', 'Helm + GitOps 部署', 'OpenStack（Ironic / Nova / Neutron）', 'OpenTelemetry / Jaeger 分散式追蹤', 'Redfish / BMC', 'GitHub Actions', 'Azure DevOps Pipeline', 'GitLab CI/CD', 'Multi-arch 容器映像建置', 'GPU 裸機納管與生命週期管理', 'Tailscale']
       },
       {
         category: '資料庫',
@@ -563,8 +563,8 @@ const contentByLocale: Record<Locale, PageContent> = {
               'Maintain the gaia middleware, the single gateway between the PaaS and every provider: it consumes RabbitMQ commands and calls providers over gRPC. Added request-id idempotency, automatic retries when the Kubernetes API server briefly drops, and dead-letter queues, so commands are never applied twice or silently lost.',
               'Designed per-tenant network isolation for bare metal (pre-created fixed-IP ports for each tenant) and security group management that keeps platform baseline rules apart from user rules and automatically connects servers in the same fault-tolerance group.',
               'Built disk wiping on server release: deep or shallow wipes run as Ironic runbooks, and a node returns to the pool only after the read-back checks pass, so no data reaches the next tenant. Also built a grace period that locks external access by detaching and reattaching floating IPs.',
-              'Extended the WebSocket BMC console (VNC/Serial) to GB200 servers with AMI MegaRAC: the platform proxies KVM and serial sessions, so the browser never sees BMC addresses or credentials, and each session is bound to a single node.',
-              'Improved observability and testing: end-to-end OpenTelemetry/Jaeger traces from the PaaS through gaia to the providers, envtest and E2E coverage, a live provider dashboard of CR state, and Proxmox VMs behind a Redfish shim that simulate GB200/H200 nodes for development and demos.',
+              'Extended the WebSocket BMC console (VNC/Serial) to new-generation GPU servers: the platform proxies KVM and serial sessions, so the browser never sees BMC addresses or credentials, and each session is bound to a single node.',
+              'Improved observability and testing: end-to-end OpenTelemetry/Jaeger traces from the PaaS through gaia to the providers, envtest and E2E coverage, a live provider dashboard of CR state, and Proxmox VMs behind a Redfish shim that simulate GPU bare-metal nodes for development and demos.',
               'Write PRDs and system analysis docs, align interface contracts with the product, OpenStack, and QA teams, and contribute directly to the PaaS (Go backend, Next.js frontend) to integrate bare-metal features.',
               'Earlier, built the Next.js + TypeScript frontend monorepo (Turborepo + pnpm) and the GitHub Actions CI/CD pipeline (linting, tests, security scanning, multi-arch image builds, and Helm GitOps deployment).'
             ]
@@ -637,7 +637,7 @@ const contentByLocale: Record<Locale, PageContent> = {
       },
       {
         category: 'Cloud, Container, and DevOps',
-        items: ['Docker / Podman', 'Kubernetes', 'Kubernetes Operators (Kubebuilder / controller-runtime / envtest)', 'Helm + GitOps deployment', 'OpenStack (Ironic / Nova / Neutron)', 'OpenTelemetry / Jaeger tracing', 'Redfish / BMC (AMI MegaRAC)', 'GitHub Actions', 'Azure DevOps Pipeline', 'GitLab CI/CD', 'Multi-arch container builds', 'GPU bare-metal lifecycle management', 'Tailscale']
+        items: ['Docker / Podman', 'Kubernetes', 'Kubernetes Operators (Kubebuilder / controller-runtime / envtest)', 'Helm + GitOps deployment', 'OpenStack (Ironic / Nova / Neutron)', 'OpenTelemetry / Jaeger tracing', 'Redfish / BMC', 'GitHub Actions', 'Azure DevOps Pipeline', 'GitLab CI/CD', 'Multi-arch container builds', 'GPU bare-metal lifecycle management', 'Tailscale']
       },
       {
         category: 'Database',
