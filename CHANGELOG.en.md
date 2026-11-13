@@ -5,6 +5,7 @@ newest first, headings are "## version - date". See `RELEASING.md` for how to cu
 
 ## Unreleased
 
+- Rewrote **Chthonia** in work experience, about, summary, and projects around the current focus: the **Baremetal Provider (Kubernetes operator) and the gaia middleware**; skills now list RabbitMQ, gRPC, OpenTelemetry, Redfish, and more
 - Chinese résumé: removed the 5 awards from the **National Computer Multimedia, AI Literacy and Business Applications Competition** under competitions and activities
 
 ## 2.1.0 - 2026-10-17

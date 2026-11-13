@@ -137,14 +137,14 @@ const contentByLocale: Record<Locale, PageContent> = {
       imageAlt: '藍詠弘 Bluz Lan 個人照片',
       paragraphs: [
         '我是藍詠弘（Bluz Lan），具備後端、前端、雲端平台、DevOps 與機器學習整合能力的軟體工程師。',
-        '目前任職於緯創資通 Chthonia 團隊，負責 OpenStack 與 Kubernetes 平台建置、GPU 節點納管及儲存權限策略設計，並持續參與企業系統開發、敏捷流程與跨團隊協作交付。',
+        '目前任職於緯創資通 Chthonia 團隊，開發 AIDC 的 GPU 裸機雲平台：以 Go 開發 Kubernetes Operator 管理裸機的完整生命週期，並維護 gaia 中介層，串接上層 PaaS 與底層 OpenStack。',
         '業餘時間持續投入 AI Agent 相關研究與實作，聚焦流程自動化、任務協作與落地應用。'
       ]
     },
     summaryTitle: '專業摘要',
     summaryBullets: [
       '具備後端 / 前端 / 雲端 / DevOps / ML 綜合背景，能從平台到應用端進行整合開發。',
-      '目前於緯創 Chthonia / AIDC 專案負責 OpenStack、Kubernetes、GPU Node 與 Storage 權限規劃與落地。',
+      '目前於緯創 Chthonia / AIDC 專案負責 Baremetal Provider（Kubernetes Operator）與 gaia 中介層，涵蓋 GPU 裸機建機、多租戶網路、安全群組、磁碟清除與 BMC Console。',
       '曾參與企業內部系統（DPOM、SPOS）、行動裝置 App、ERP 系統維護與智慧製造 / 工業物聯網研究計畫。',
       '於緯創多個專案中實際參與 Scrum 敏捷流程（Sprint 規劃、Daily、Review、Retrospective）。'
     ],
@@ -167,10 +167,14 @@ const contentByLocale: Record<Locale, PageContent> = {
           {
             period: '2025 年 9 月 - 至今',
             bullets: [
-              '開發 Go/Gin 中介層 API，整合 OpenStack（Keystone、Ironic、Nova），實現多叢集統一管理。',
-              '建構 Next.js + TypeScript 前端 Monorepo（Turborepo + pnpm），涵蓋 Admin Portal 與 Service Portal。',
-              '實作 WebSocket BMC Console（VNC/Serial），支援即時遠端裸機管理與維運排錯。',
-              '設計 GitHub Actions CI/CD Pipeline，涵蓋 Lint、Unit Test、E2E Test、Security Scan、Multi-arch Docker Build 與 Helm GitOps 部署。'
+              '負責 Baremetal Provider：以 Go + controller-runtime 開發 Kubernetes Operator，用 CRD 宣告並調和 GPU 裸機的建機、重建、電源、刪除與歸還，透過 Gophercloud 串接 OpenStack Ironic / Nova / Neutron。',
+              '維護 gaia 中介層：作為 PaaS 與各 Provider 之間的唯一出入口，接收 RabbitMQ 指令、以 gRPC 呼叫 Provider；實作 request-id 冪等、K8s apiserver 短暫中斷時自動重試與死信佇列，避免指令被重複套用或靜默遺失。',
+              '設計裸機多租戶網路隔離（每個租戶預建 fixed-IP port），以及安全群組管理：平台基線規則與使用者規則分開，同一容錯組的伺服器自動互通。',
+              '實作機器歸還清碟：以 Ironic runbook 執行深層 / 淺層磁碟清除，讀回結果通過檢查才把節點放回資源池，避免資料留給下一位租戶；另實作寬限期，以卸下 / 綁回 Floating IP 鎖定對外存取。',
+              '延伸 WebSocket BMC Console（VNC / Serial）支援 GB200（AMI MegaRAC）：由平台代理 KVM 與 Serial 連線，瀏覽器拿不到 BMC 位址與憑證，每個 session 只綁定單一節點。',
+              '強化可觀測性與測試：以 OpenTelemetry / Jaeger 串起 PaaS → gaia → Provider 的完整 trace，以 envtest / E2E 補齊測試；自建 Provider Dashboard 即時顯示 CR 狀態，並以 Proxmox VM + Redfish 模擬 GB200 / H200 節點供開發與展示。',
+              '撰寫 PRD / SA，與 Product、OpenStack、QA 團隊對齊介面契約，並直接協助 PaaS 端（Go 後端、Next.js 前端）串接裸機功能。',
+              '前期建構 Next.js + TypeScript 前端 Monorepo（Turborepo + pnpm），以及 GitHub Actions CI/CD（Lint、測試、Security Scan、Multi-arch 映像建置與 Helm GitOps 部署）。'
             ]
           }
         ]
@@ -238,7 +242,7 @@ const contentByLocale: Record<Locale, PageContent> = {
       },
       {
         category: '後端開發',
-        items: ['Node.js（TypeScript）', 'Express.js（Node.js Framework）', 'Golang + Gin API 開發', 'Gophercloud（OpenStack SDK）整合', 'RESTful API 設計與實作', 'WebSocket 即時連線', 'BullMQ 非同步任務佇列', 'FastAPI', 'Java Spring Web MVC / Spring Boot', 'Django / Flask 基本 Web 服務']
+        items: ['Node.js（TypeScript）', 'Express.js（Node.js Framework）', 'Golang + Gin API 開發', 'Gophercloud（OpenStack SDK）整合', 'RESTful API 設計與實作', 'WebSocket 即時連線', 'gRPC', 'RabbitMQ 訊息佇列（冪等、重試、死信佇列）', 'BullMQ 非同步任務佇列', 'FastAPI', 'Java Spring Web MVC / Spring Boot', 'Django / Flask 基本 Web 服務']
       },
       {
         category: '前端開發',
@@ -246,7 +250,7 @@ const contentByLocale: Record<Locale, PageContent> = {
       },
       {
         category: '雲端、容器與 DevOps',
-        items: ['Docker / Podman', 'Kubernetes', 'Kubernetes Operator（Kubebuilder）', 'Helm + GitOps 部署', 'OpenStack', 'GitHub Actions', 'Azure DevOps Pipeline', 'GitLab CI/CD', 'Multi-arch 容器映像建置', 'GPU Node 納管與資源管理', 'Tailscale']
+        items: ['Docker / Podman', 'Kubernetes', 'Kubernetes Operator（Kubebuilder / controller-runtime / envtest）', 'Helm + GitOps 部署', 'OpenStack（Ironic / Nova / Neutron）', 'OpenTelemetry / Jaeger 分散式追蹤', 'Redfish / BMC（AMI MegaRAC）', 'GitHub Actions', 'Azure DevOps Pipeline', 'GitLab CI/CD', 'Multi-arch 容器映像建置', 'GPU 裸機納管與生命週期管理', 'Tailscale']
       },
       {
         category: '資料庫',
@@ -272,8 +276,8 @@ const contentByLocale: Record<Locale, PageContent> = {
     projects: [
       {
         title: 'Chthonia',
-        description: '在緯創資通 Chthonia 團隊中開發 AIDC 產品，以 Golang + Gin 開發 API，並結合 Gophercloud 串接 OpenStack 服務；同時整合 Kubernetes 與 GPU 節點，支援 AI/ML 工作負載與多租戶儲存權限管理。',
-        technologies: ['Golang', 'Gin', 'Gophercloud', 'OpenStack', 'Kubernetes', 'GPU Node', 'Storage ACL', 'Scrum']
+        description: '在緯創資通 Chthonia 團隊開發 AIDC 的 GPU 裸機雲平台：以 Go 開發 Kubernetes Operator（Baremetal Provider）管理裸機生命週期，並維護 gaia 中介層串接 PaaS、RabbitMQ 與 OpenStack（Ironic / Nova / Neutron），涵蓋多租戶網路、安全群組、磁碟清除與 BMC Console。',
+        technologies: ['Golang', 'Kubernetes Operator', 'controller-runtime', 'OpenStack Ironic', 'Gophercloud', 'RabbitMQ', 'gRPC', 'OpenTelemetry', 'Scrum']
       },
       {
         title: 'DPOM 企業內部訂單管理系統',
@@ -525,14 +529,14 @@ const contentByLocale: Record<Locale, PageContent> = {
       imageAlt: 'Portrait of Bluz Lan',
       paragraphs: [
         'I am Bluz Lan, a software engineer with hands-on experience across backend, frontend, cloud platform engineering, DevOps, and ML-related work.',
-        'I currently work on Wistron Chthonia/AIDC initiatives focused on OpenStack, Kubernetes, GPU node onboarding, and storage access control.',
+        'I currently work on the Wistron Chthonia/AIDC GPU bare-metal cloud: I build a Kubernetes operator in Go that manages the full lifecycle of bare-metal servers, and maintain the gaia middleware that connects the PaaS above with OpenStack below.',
         'I am also actively researching and prototyping AI Agent solutions, with a focus on workflow automation, multi-step task collaboration, and practical use cases.'
       ]
     },
     summaryTitle: 'Professional Summary',
     summaryBullets: [
       'Cross-domain experience in backend, frontend, cloud infrastructure, DevOps, and ML workflows.',
-      'Delivered Wistron AIDC initiatives across OpenStack, Kubernetes, GPU node setup, and storage permission design.',
+      'At Wistron Chthonia/AIDC, own the Baremetal Provider (a Kubernetes operator) and the gaia middleware: GPU bare-metal provisioning, multi-tenant networking, security groups, disk wiping, and BMC consoles.',
       'Built and maintained enterprise systems (DPOM, SPOS), mobile applications, ERP modules, and research projects in smart manufacturing / IIoT.',
       'Strong Scrum execution experience: sprint planning, daily stand-ups, reviews, and retrospectives.'
     ],
@@ -555,10 +559,14 @@ const contentByLocale: Record<Locale, PageContent> = {
           {
             period: 'Sep 2025 - Present',
             bullets: [
-              'Developed a Go/Gin middleware API layer integrating OpenStack (Keystone, Ironic, Nova) to provide unified multi-cluster management APIs.',
-              'Built a Next.js + TypeScript frontend monorepo (Turborepo + pnpm) for both the Admin Portal and Service Portal.',
-              'Implemented a WebSocket BMC console (VNC/Serial) for real-time remote bare-metal operations and troubleshooting.',
-              'Designed a GitHub Actions CI/CD pipeline covering linting, unit tests, E2E tests, security scanning, multi-arch Docker builds, and Helm-based GitOps deployments.'
+              'Own the Baremetal Provider, a Kubernetes operator in Go (controller-runtime) whose CRDs declare and reconcile the full lifecycle of GPU bare-metal servers (provisioning, redeploy, power, deletion, and release), backed by OpenStack Ironic, Nova, and Neutron through Gophercloud.',
+              'Maintain the gaia middleware, the single gateway between the PaaS and every provider: it consumes RabbitMQ commands and calls providers over gRPC. Added request-id idempotency, automatic retries when the Kubernetes API server briefly drops, and dead-letter queues, so commands are never applied twice or silently lost.',
+              'Designed per-tenant network isolation for bare metal (pre-created fixed-IP ports for each tenant) and security group management that keeps platform baseline rules apart from user rules and automatically connects servers in the same fault-tolerance group.',
+              'Built disk wiping on server release: deep or shallow wipes run as Ironic runbooks, and a node returns to the pool only after the read-back checks pass, so no data reaches the next tenant. Also built a grace period that locks external access by detaching and reattaching floating IPs.',
+              'Extended the WebSocket BMC console (VNC/Serial) to GB200 servers with AMI MegaRAC: the platform proxies KVM and serial sessions, so the browser never sees BMC addresses or credentials, and each session is bound to a single node.',
+              'Improved observability and testing: end-to-end OpenTelemetry/Jaeger traces from the PaaS through gaia to the providers, envtest and E2E coverage, a live provider dashboard of CR state, and Proxmox VMs behind a Redfish shim that simulate GB200/H200 nodes for development and demos.',
+              'Write PRDs and system analysis docs, align interface contracts with the product, OpenStack, and QA teams, and contribute directly to the PaaS (Go backend, Next.js frontend) to integrate bare-metal features.',
+              'Earlier, built the Next.js + TypeScript frontend monorepo (Turborepo + pnpm) and the GitHub Actions CI/CD pipeline (linting, tests, security scanning, multi-arch image builds, and Helm GitOps deployment).'
             ]
           }
         ]
@@ -621,7 +629,7 @@ const contentByLocale: Record<Locale, PageContent> = {
       },
       {
         category: 'Backend Development',
-        items: ['Node.js (TypeScript)', 'Express.js', 'Golang + Gin API development', 'Gophercloud (OpenStack SDK) integration', 'RESTful APIs', 'WebSocket', 'BullMQ job queues', 'FastAPI', 'Java Spring MVC / Spring Boot', 'Django / Flask']
+        items: ['Node.js (TypeScript)', 'Express.js', 'Golang + Gin API development', 'Gophercloud (OpenStack SDK) integration', 'RESTful APIs', 'WebSocket', 'gRPC', 'RabbitMQ (idempotency, retries, dead-letter queues)', 'BullMQ job queues', 'FastAPI', 'Java Spring MVC / Spring Boot', 'Django / Flask']
       },
       {
         category: 'Frontend Development',
@@ -629,7 +637,7 @@ const contentByLocale: Record<Locale, PageContent> = {
       },
       {
         category: 'Cloud, Container, and DevOps',
-        items: ['Docker / Podman', 'Kubernetes', 'Kubernetes Operators (Kubebuilder)', 'Helm + GitOps deployment', 'OpenStack', 'GitHub Actions', 'Azure DevOps Pipeline', 'GitLab CI/CD', 'Multi-arch container builds', 'GPU Node Management', 'Tailscale']
+        items: ['Docker / Podman', 'Kubernetes', 'Kubernetes Operators (Kubebuilder / controller-runtime / envtest)', 'Helm + GitOps deployment', 'OpenStack (Ironic / Nova / Neutron)', 'OpenTelemetry / Jaeger tracing', 'Redfish / BMC (AMI MegaRAC)', 'GitHub Actions', 'Azure DevOps Pipeline', 'GitLab CI/CD', 'Multi-arch container builds', 'GPU bare-metal lifecycle management', 'Tailscale']
       },
       {
         category: 'Database',
@@ -647,8 +655,8 @@ const contentByLocale: Record<Locale, PageContent> = {
     projects: [
       {
         title: 'Chthonia',
-        description: 'Built APIs with Golang and Gin, integrated OpenStack services via Gophercloud, and combined Kubernetes with GPU nodes to support internal AI/ML workloads with tenant-aware storage access control.',
-        technologies: ['Golang', 'Gin', 'Gophercloud', 'OpenStack', 'Kubernetes', 'GPU', 'Storage ACL', 'Scrum']
+        description: 'The Wistron AIDC GPU bare-metal cloud: a Go Kubernetes operator (the Baremetal Provider) manages the lifecycle of bare-metal servers, and the gaia middleware connects the PaaS, RabbitMQ, and OpenStack (Ironic, Nova, Neutron), covering multi-tenant networking, security groups, disk wiping, and BMC consoles.',
+        technologies: ['Golang', 'Kubernetes Operator', 'controller-runtime', 'OpenStack Ironic', 'Gophercloud', 'RabbitMQ', 'gRPC', 'OpenTelemetry', 'Scrum']
       },
       {
         title: 'DPOM Enterprise System',
