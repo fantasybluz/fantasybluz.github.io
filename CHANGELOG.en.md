@@ -5,6 +5,8 @@ newest first, headings are "## version - date". See `RELEASING.md` for how to cu
 
 ## Unreleased
 
+- Chinese résumé: removed the 5 awards from the **National Computer Multimedia, AI Literacy and Business Applications Competition** under competitions and activities
+
 ## 2.1.0 - 2026-10-17
 
 - The footer shows the **version number**, which opens this **changelog**
